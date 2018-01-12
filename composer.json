@@ -1,0 +1,31 @@
+{
+	"name": "masterro/laravel-mailable-viewer",
+	"description": "Easily view in browser outgoing emails.",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Roman Ihoshyn",
+			"email": "igoshin18@gmail.com"
+		}
+	],
+	"require": {
+		"illuminate/support": "^5.5",
+		"illuminate/events": "^5.5",
+		"illuminate/mail": "^5.5"
+	},
+	"require-dev": {
+		"orchestra/testbench": "^3.5",
+		"phpunit/phpunit": "^6.5"
+	},
+	"autoload": {
+		"psr-4": {
+			"MasterRO\\MailableViewer\\": "src/app"
+		}
+	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"config": {
+		"sort-packages": true,
+		"optimize-autoloader": true
+	}
+}
