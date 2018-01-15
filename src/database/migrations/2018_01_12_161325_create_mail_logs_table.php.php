@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -13,13 +15,13 @@ class CreateMailLogsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create(config('mail-viewer.table'), function (Blueprint $table) {
+		Schema::create(config('mail-viewer.table', 'mail_logs'), function (Blueprint $table) {
 			$table->increments('id');
 
-			$table->string('from')->nullable();
-			$table->string('to')->nullable();
-			$table->string('cc')->nullable();
-			$table->string('bcc')->nullable();
+			$table->json('from')->nullable();
+			$table->json('to')->nullable();
+			$table->json('cc')->nullable();
+			$table->json('bcc')->nullable();
 			$table->string('subject');
 			$table->text('body');
 			$table->text('headers')->nullable();

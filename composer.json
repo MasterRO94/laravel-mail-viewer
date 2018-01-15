@@ -39,7 +39,7 @@
 	"extra": {
 		"laravel": {
 			"providers": [
-				"MasterRO\\MailViewer\\MailViewerServiceProvider"
+				"MasterRO\\MailViewer\\Providers\\MailViewerServiceProvider"
 			]
 		}
 	}

@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MasterRO\MailViewer;
+namespace MasterRO\MailViewer\Listeners;
 
-use Illuminate\Support\Facades\DB;
+use Swift_Message;
+use MasterRO\MailViewer\Models\MailLog;
 use Illuminate\Mail\Events\MessageSending;
 
 class MailLogger
@@ -18,11 +19,11 @@ class MailLogger
 	{
 		$message = $event->message;
 
-		DB::table(config('mail-viewer.table'))->insert([
-			'from'        => $this->formatAddressField($message, 'From'),
-			'to'          => $this->formatAddressField($message, 'To'),
-			'cc'          => $this->formatAddressField($message, 'Cc'),
-			'bcc'         => $this->formatAddressField($message, 'Bcc'),
+		MailLog::create([
+			'from'        => $this->addressField($message, 'From'),
+			'to'          => $this->addressField($message, 'To'),
+			'cc'          => $this->addressField($message, 'Cc'),
+			'bcc'         => $this->addressField($message, 'Bcc'),
 			'subject'     => $message->getSubject(),
 			'body'        => $message->getBody(),
 			'headers'     => (string)$message->getHeaders(),
@@ -40,7 +41,7 @@ class MailLogger
 	 *
 	 * @return null|string
 	 */
-	function formatAddressField($message, $field)
+	protected function addressField(Swift_Message $message, $field)
 	{
 		$headers = $message->getHeaders();
 
@@ -48,18 +49,10 @@ class MailLogger
 			return null;
 		}
 
-		$mailboxes = $headers->get($field)->getFieldBodyModel();
-
-		$strings = [];
-		foreach ($mailboxes as $email => $name) {
-			$mailboxStr = $email;
-			if (null !== $name) {
-				$mailboxStr = $name . ' <' . $mailboxStr . '>';
-			}
-			$strings[] = $mailboxStr;
-		}
-
-		return implode(', ', $strings);
+		return collect($headers->get($field)->getFieldBodyModel())
+			->map(function ($name, $email) {
+				return compact('email', 'name');
+			})->values();
 	}
 
 }
