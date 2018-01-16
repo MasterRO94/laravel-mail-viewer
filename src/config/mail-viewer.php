@@ -6,6 +6,8 @@ return [
 
 	'middleware' => ['web'],
 
-	'date_format' => 'd.m.Y H:i:s'
+	'date_format' => 'd.m.Y H:i:s',
+
+	'emails_per_page' => 20,
 
 ];

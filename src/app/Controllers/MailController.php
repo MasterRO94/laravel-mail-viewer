@@ -14,7 +14,7 @@ class MailController extends Controller
 	 */
 	public function index()
 	{
-		$mails = MailLog::latest('date')->paginate(1);
+		$mails = MailLog::latest('date')->paginate(config('mail-viewer.emails_per_page', 20));
 
 		if (request()->expectsJson()) {
 			return response()->json(['success' => true, 'data' => $mails]);
