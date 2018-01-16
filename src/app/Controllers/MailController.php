@@ -14,7 +14,7 @@ class MailController extends Controller
 	 */
 	public function index()
 	{
-		$mails = MailLog::latest('date')->paginate();
+		$mails = MailLog::latest('date')->paginate(1);
 
 		if (request()->expectsJson()) {
 			return response()->json(['success' => true, 'data' => $mails]);
@@ -22,4 +22,16 @@ class MailController extends Controller
 
 		return view('mail-viewer::mails.index', compact('mails'));
 	}
+
+
+	/**
+	 * @param MailLog $mailLog
+	 *
+	 * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+	 */
+	public function show(MailLog $mailLog)
+	{
+		return view('mail-viewer::mails.view', compact('mailLog'));
+	}
+
 }

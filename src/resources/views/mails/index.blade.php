@@ -2,30 +2,36 @@
 
 @section('content')
 	<div class="flex mb-4">
-		<aside class="w-1/4 flex flex-col">
-			<section
-					v-for="mail in mails.data"
-					class="flex mail-item bg-grey-lightest hover:bg-blue-light text-grey-darker hover:text-white border-b border-blue-light hover:border-transparent py-2 px-3 cursor-pointer"
-					v-cloak
-			>
-				<div class="w-3/4 text-sm">
-						<span>
-							@{{ mail.subject }}
-						</span>
-					<br>
-					<span class="text-xs"><strong>To:</strong><span v-html="mail.formattedTo"></span></span>
-				</div>
-				<div class="w-1/4 text-sm text-right">
-					@{{ mail.formattedDate }}
-				</div>
-			</section>
-			<div class="text-4xl text-blue-dark text-center py-2">
-				<i class="fas fa-spinner fa-spin" v-show="loading"></i>
+		@include('mail-viewer::mails._sidebar')
+
+		<main class="w-3/4 px-2">
+			<div v-if="currentMail" v-cloak>
+				<header class="text-base px-2 py-2">
+					<h3 class="mb-2 text-grey-darkest" v-text="currentMail.subject"></h3>
+					<p class="text-sm">
+						<strong>From:</strong>
+						<span class="text-grey-darkest" v-html="currentMail.formattedFrom"></span>
+					</p>
+					<p class="text-sm mt-1">
+						<strong>To:</strong>
+						<span class="text-grey-darkest" v-html="currentMail.formattedTo"></span>
+					</p>
+				</header>
+				<tabs>
+					<tab name="Preview">
+						<iframe :srcdoc="currentMail.body"
+						        frameborder="0"
+						        width="100%"
+						        height="600px"
+						></iframe>
+					</tab>
+					<tab name="HTML">
+						<div class="overflow-x-scroll">
+							<pre class="text-xs"><code v-text="currentMail.body"></code></pre>
+						</div>
+					</tab>
+				</tabs>
 			</div>
-		</aside>
-
-		<main class="w-3/4">
-
 		</main>
 	</div>
 @endsection

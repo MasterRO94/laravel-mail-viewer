@@ -1,52 +1,74 @@
 require('./bootstrap');
 
-const app = new Vue({
-        el: '#app',
+window.app = new Vue({
+    el: '#app',
 
-        data() {
-            return {
-                loading: false,
-                mails: {
-                    next_page_url: window.location.origin + '/mail-viewer'
-                },
-            };
-        },
-
-        mounted() {
-            this.init();
-        },
-
-        methods: {
-            init() {
-                let vm = this;
-
-                vm.loadMails();
+    data() {
+        return {
+            firstLoad: true,
+            loadingMails: false,
+            loadingMail: false,
+            mails: {
+                next_page_url: window.location.origin + '/mail-viewer'
             },
+            currentMail: null,
+        };
+    },
 
-            loadMails() {
-                let vm = this;
+    mounted() {
+        this.init();
+    },
 
-                vm.loading = true;
-                axios.get(vm.mails.next_page_url)
-                    .then(response => {
-                        let data = response.data;
+    methods: {
+        init() {
+            let vm = this;
 
-                        if (data.success) {
-                            vm.mails = data.data;
-                        } else {
-                            console.error('Something went wrong!');
-                        }
-
-                        vm.loading = false;
-                    })
-                    .catch(e => {
-                        vm.loading = false;
-
-                        console.log(e);
-                    });
-            }
+            vm.loadMails();
         },
 
+        loadMails() {
+            let vm = this;
 
-    })
+            vm.loadingMails = true;
+            axios.get(vm.mails.next_page_url)
+                .then(response => {
+                    let data = response.data;
+
+                    if (data.success) {
+                        let mails = vm.mails.data || [];
+
+                        _.each(data.data.data, (mail) => {
+                            mails.push(mail);
+                        });
+
+                        vm.mails = data.data;
+                        vm.mails.data = mails;
+
+                        if (vm.mails.data && !vm.currentMail) {
+                            vm.currentMail = vm.mails.data[0];
+                        }
+                    } else {
+                        console.error('Something went wrong!');
+                    }
+
+                    vm.loadingMails = false;
+                    vm.firstLoad = false;
+                })
+                .catch(e => {
+                    vm.loadingMails = false;
+                    vm.firstLoad = false;
+
+                    console.log(e);
+                });
+        },
+
+        view(mail) {
+            this.loadingMail = true;
+            this.currentMail = mail;
+        },
+
+    },
+
+
+})
 ;

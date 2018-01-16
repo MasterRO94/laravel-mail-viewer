@@ -1,3 +1,6 @@
+import Vue from 'vue';
+import {Tabs, Tab} from 'vue-tabs-component';
+
 window._ = require('lodash');
 
 /**
@@ -7,7 +10,10 @@ window._ = require('lodash');
  */
 
 window.$ = window.jQuery = require('jquery');
-window.Vue = require('vue');
+window.Vue = Vue;
+window.Vue.component('tabs', Tabs);
+window.Vue.component('tab', Tab);
+
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

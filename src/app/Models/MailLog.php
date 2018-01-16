@@ -64,7 +64,7 @@ class MailLog extends Model
 	{
 		return collect($this->{$field})->map(function ($mailbox) {
 			return ($mailbox->name ? "<span class=\"mail-item-name\">{$mailbox->name}</span>" : '')
-				. " <span class=\"mail-item-email\">&lt;{$mailbox->email}&gt;</span>";
+				. " &lt;<span class=\"mail-item-email\">{$mailbox->email}</span>&gt;";
 		})->implode(', ');
 	}
 
