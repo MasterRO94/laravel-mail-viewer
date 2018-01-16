@@ -31,4 +31,8 @@
 			<span v-text="loadingMails ? 'Loading...' : 'Load older'"></span>
 		</button>
 	</div>
+
+	<p class="text-grey-dark text-center text-lg mt-4" v-if="!loadingMails && _.isEmpty(mails.data)" v-cloak>
+		No emails logged.
+	</p>
 </aside>
