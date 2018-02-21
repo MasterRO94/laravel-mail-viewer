@@ -18,7 +18,7 @@ composer require masterro/laravel-mail-viewer
 For manual registration open `config/app.php` and, within the `providers` array, append:
 
 ```
-MasterRO\LaravelFileCleaner\FileCleanerServiceProvider::class
+MasterRO\MailViewer\Providers\MailViewerServiceProvider::class
 ```
 
 This will bootstrap the package into Laravel.
