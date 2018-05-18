@@ -21,7 +21,7 @@ class MailLog extends Model
 		'bcc'  => 'object',
 	];
 
-	protected $appends = ['formattedTo', 'formattedFrom', 'formattedDate'];
+	protected $appends = ['formattedTo', 'formattedFrom', 'formattedCc', 'formattedBcc', 'formattedDate'];
 
 
 	/**
@@ -52,6 +52,23 @@ class MailLog extends Model
 	public function getFormattedToAttribute()
 	{
 		return $this->formattedAddress('to');
+	}
+
+
+	/**
+	 * @return string
+	 */
+	public function getFormattedCcAttribute()
+	{
+		return $this->formattedAddress('cc');
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getFormattedBccAttribute()
+	{
+		return $this->formattedAddress('bcc');
 	}
 
 

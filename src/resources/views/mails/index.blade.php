@@ -16,6 +16,14 @@
 						<strong>To:</strong>
 						<span class="text-grey-darkest" v-html="currentMail.formattedTo"></span>
 					</p>
+					<p class="text-sm mt-1" v-show="currentMail.formattedCc">
+						<strong>Cc:</strong>
+						<span class="text-grey-darkest" v-html="currentMail.formattedCc"></span>
+					</p>
+					<p class="text-sm mt-1" v-show="currentMail.formattedBcc">
+						<strong>Bcc:</strong>
+						<span class="text-grey-darkest" v-html="currentMail.formattedBcc"></span>
+					</p>
 				</header>
 				<tabs>
 					<tab name="Preview">
