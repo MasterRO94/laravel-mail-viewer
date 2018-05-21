@@ -39,4 +39,4 @@ php artisan migrate
 ```
 
 ### Step 5: View emails
-All ongoing emails would be displayed on `/mail-viewer` page.
+All ongoing emails would be displayed on `/_mail-viewer` page by default.
