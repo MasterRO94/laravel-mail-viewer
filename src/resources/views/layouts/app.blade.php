@@ -12,7 +12,7 @@
 	<link rel="stylesheet" href="{{ asset('vendor/mail-viewer/css/app.css') }}">
 </head>
 <body>
-<div id="app" class="mx-auto">
+<div id="app" class="mx-auto" data-uri="{{ config('mail-viewer.uri_prefix') }}">
 	@include('mail-viewer::partials.header')
 
 	@yield('content')
