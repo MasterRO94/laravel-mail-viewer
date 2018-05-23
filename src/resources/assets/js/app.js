@@ -9,7 +9,7 @@ window.app = new Vue({
             loadingMails: false,
             loadingMail: false,
             mails: {
-                next_page_url: window.location.origin + '/mail-viewer'
+                next_page_url: window.location.origin + '/' + this.$el.dataset.uri
             },
             currentMail: null,
         };
