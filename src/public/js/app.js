@@ -791,7 +791,7 @@ window.app = new Vue({
             loadingMails: false,
             loadingMail: false,
             mails: {
-                next_page_url: window.location.origin + '/' + this.$el.dataset.uri
+                next_page_url: window.location.origin + '/' + document.getElementById('app').dataset.uri
             },
             currentMail: null
         };
