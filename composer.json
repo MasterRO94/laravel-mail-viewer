@@ -15,11 +15,11 @@
 		"log"
 	],
 	"require": {
-		"illuminate/support": "^5.5|^5.6",
-		"illuminate/events": "^5.5|^5.6",
-		"illuminate/database": "^5.5|^5.6",
-		"illuminate/routing": "^5.5|^5.6",
-		"illuminate/mail": "^5.5|^5.6"
+		"illuminate/support": "^5.5,<5.8",
+		"illuminate/events": "^5.5,<5.8",
+		"illuminate/database": "^5.5,<5.8",
+		"illuminate/routing": "^5.5,<5.8",
+		"illuminate/mail": "^5.5,<5.8"
 	},
 	"require-dev": {
 		"orchestra/testbench": "^3.5",
