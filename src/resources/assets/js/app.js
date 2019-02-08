@@ -1,74 +1,85 @@
 require('./bootstrap');
 
 window.app = new Vue({
-    el: '#app',
+  el: '#app',
 
-    data() {
-        return {
-            firstLoad: true,
-            loadingMails: false,
-            loadingMail: false,
-            mails: {
-                next_page_url: window.location.origin + '/' + document.getElementById('app').dataset.uri
-            },
-            currentMail: null,
-        };
+  data() {
+    const firstLoadUrl = window.location.origin + '/' + document.getElementById('app').dataset.uri;
+
+    return {
+      firstLoad: true,
+      loadingMails: false,
+      loadingMail: false,
+      refreshData: {
+        next_page_url: firstLoadUrl
+      },
+      mails: {
+        next_page_url: firstLoadUrl
+      },
+      currentMail: null
+    };
+  },
+
+  mounted() {
+    this.init();
+  },
+
+  methods: {
+    init() {
+      let vm = this;
+
+      vm.loadMails();
     },
 
-    mounted() {
-        this.init();
+    refresh() {
+      let vm = this;
+
+      vm.mails = vm.refreshData;
+      vm.loadMails();
     },
 
-    methods: {
-        init() {
-            let vm = this;
+    loadMails() {
+      let vm = this;
 
-            vm.loadMails();
-        },
+      vm.loadingMails = true;
+      axios.get(vm.mails.next_page_url)
+           .then(response => {
+             let data = response.data;
 
-        loadMails() {
-            let vm = this;
+             if (data.success) {
+               let mails = vm.mails.data || [];
 
-            vm.loadingMails = true;
-            axios.get(vm.mails.next_page_url)
-                .then(response => {
-                    let data = response.data;
+               _.each(data.data.data, (mail) => {
+                 mails.push(mail);
+               });
 
-                    if (data.success) {
-                        let mails = vm.mails.data || [];
+               vm.mails = data.data;
+               vm.mails.data = mails;
 
-                        _.each(data.data.data, (mail) => {
-                            mails.push(mail);
-                        });
+               if (vm.mails.data && !vm.currentMail) {
+                 vm.currentMail = vm.mails.data[0];
+               }
+             } else {
+               console.error('Something went wrong!');
+             }
 
-                        vm.mails = data.data;
-                        vm.mails.data = mails;
+             vm.loadingMails = false;
+             vm.firstLoad = false;
+           })
+           .catch(e => {
+             vm.loadingMails = false;
+             vm.firstLoad = false;
 
-                        if (vm.mails.data && !vm.currentMail) {
-                            vm.currentMail = vm.mails.data[0];
-                        }
-                    } else {
-                        console.error('Something went wrong!');
-                    }
-
-                    vm.loadingMails = false;
-                    vm.firstLoad = false;
-                })
-                .catch(e => {
-                    vm.loadingMails = false;
-                    vm.firstLoad = false;
-
-                    console.log(e);
-                });
-        },
-
-        view(mail) {
-            this.loadingMail = true;
-            this.currentMail = mail;
-        },
-
+             console.log(e);
+           });
     },
 
+    view(mail) {
+      this.loadingMail = true;
+      this.currentMail = mail;
+    }
+
+  }
 
 })
 ;

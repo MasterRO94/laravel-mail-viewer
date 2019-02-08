@@ -1,4 +1,15 @@
 <aside class="w-1/4 flex flex-col">
+	<div class="px-2 py-2 mt-2" v-cloak>
+		<button class="bg-transparent block w-full hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded"
+				:class="{'opacity-50 cursor-not-allowed': loadingMails}"
+				:disabled="loadingMails"
+				v-on:click="refresh()"
+		>
+			<i class="fas fa-spinner fa-spin" v-show="loadingMails"></i>
+			<span v-text="loadingMails ? 'Loading...' : 'Refresh'"></span>
+		</button>
+	</div>
+
 	<section
 			v-for="mail in mails.data"
 			class="flex mail-item bg-grey-lightest hover:bg-blue-light text-grey-darker hover:text-white border-b border-blue-light hover:border-transparent py-2 px-3 cursor-pointer"
