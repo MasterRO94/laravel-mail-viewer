@@ -7,6 +7,7 @@ window.app = new Vue({
     const firstLoadUrl = window.location.origin + '/' + document.getElementById('app').dataset.uri;
 
     return {
+      search: '',
       firstLoad: true,
       loadingMails: false,
       loadingMail: false,
@@ -78,8 +79,34 @@ window.app = new Vue({
       this.loadingMail = true;
       this.currentMail = mail;
     }
+  },
 
+  computed: {
+    filteredMails() {
+      const search = this.search.toLowerCase().trim();
+
+      if (!search) {
+        return this.mails.data;
+      }
+
+      return this.mails.data.filter((mail) => {
+        const searchObject= {
+          formattedFrom: mail.formattedFrom || '',
+          formattedTo: mail.formattedTo || '',
+          subject: mail.subject || '',
+          formattedDate: mail.formattedDate || '',
+          formattedCc: mail.formattedCc || '',
+          formattedBcc: mail.formattedBcc || '',
+        };
+
+        return searchObject.formattedFrom.toLowerCase().includes(search) ||
+          searchObject.formattedTo.toLowerCase().includes(search) ||
+          searchObject.subject.toLowerCase().includes(search) ||
+          searchObject.formattedDate.toLowerCase().includes(search) ||
+          searchObject.formattedCc.toLowerCase().includes(search) ||
+          searchObject.formattedBcc.toLowerCase().includes(search);
+      });
+    }
   }
-
 })
 ;

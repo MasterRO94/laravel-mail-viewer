@@ -7,5 +7,5 @@ mix
     postCss: [tailwindcss('./tailwind.js')]
   })
   .setPublicPath('public')
-  .sass('src/resources/assets/sass/app.scss', 'src/public/css')
-  .js('src/resources/assets/js/app.js', 'src/public/js');
+  .sass('src/resources/assets/sass/app.scss', 'css')
+  .js('src/resources/assets/js/app.js', 'js');

@@ -1,5 +1,9 @@
 <aside class="w-1/4 flex flex-col">
 	<div class="px-2 py-2 mt-2" v-cloak>
+		<input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="search" type="search" placeholder="Search" v-model="search">
+	</div>
+
+	<div class="px-2 py-2 mt-2" v-cloak>
 		<button class="bg-transparent block w-full hover:bg-blue text-blue-dark font-semibold hover:text-white py-2 px-4 border border-blue hover:border-transparent rounded"
 				:class="{'opacity-50 cursor-not-allowed': loadingMails}"
 				:disabled="loadingMails"
@@ -11,7 +15,7 @@
 	</div>
 
 	<section
-			v-for="mail in mails.data"
+			v-for="mail in filteredMails"
 			class="flex mail-item bg-grey-lightest hover:bg-blue-light text-grey-darker hover:text-white border-b border-blue-light hover:border-transparent py-2 px-3 cursor-pointer"
 			:class="{active: currentMail && mail.id == currentMail.id}"
 			v-on:click="view(mail)"
