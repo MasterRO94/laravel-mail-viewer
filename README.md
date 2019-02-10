@@ -29,7 +29,7 @@ This will bootstrap the package into Laravel.
 php artisan vendor:publish --provider="MasterRO\MailViewer\Providers\MailViewerServiceProvider"
 ```
 
-You have to publish _**assets,**_ _configs_ are optional.
+You have to publish _**assets,**_ and _**views,**_ _configs_ are optional.
 
 
 ### Step 4: Run migrations
