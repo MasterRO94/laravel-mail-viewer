@@ -29,6 +29,24 @@ class MailViewerServiceProvider extends EventServiceProvider
 	{
 		parent::boot();
 
+		$this->publish();
+
+		$this->mergeConfigFrom(
+			__DIR__ . '/../../config/mail-viewer.php', 'mail-viewer'
+		);
+
+		$this->loadMigrationsFrom(__DIR__ . '/../../database/migrations/');
+
+		$this->loadRoutesFrom(__DIR__ . '/../../resources/routes/web.php');
+
+		$this->loadViewsFrom(__DIR__ . '/../../resources/views', 'mail-viewer');
+	}
+
+	/**
+	 * Publish config, views and assets
+	 */
+	protected function publish()
+	{
 		$this->publishes([
 			__DIR__ . '/../../config/mail-viewer.php' => config_path('mail-viewer.php'),
 		], 'mail-viewer-config');
@@ -37,22 +55,8 @@ class MailViewerServiceProvider extends EventServiceProvider
 			__DIR__ . '/../../resources/views' => resource_path('views/vendor/mail-viewer'),
 		], 'mail-viewer-views');
 
-//		$this->publishes([
-//			__DIR__ . '/../../database/migrations/' => database_path('migrations'),
-//		], 'migrations');
-
-		$this->mergeConfigFrom(
-			__DIR__ . '/../../config/mail-viewer.php', 'mail-viewer'
-		);
-
 		$this->publishes([
 			__DIR__ . '/../../public/' => public_path('vendor/mail-viewer'),
 		], 'mail-viewer-assets');
-
-		$this->loadMigrationsFrom(__DIR__ . '/../../database/migrations/');
-
-		$this->loadRoutesFrom(__DIR__ . '/../../resources/routes/web.php');
-
-		$this->loadViewsFrom(__DIR__ . '/../../resources/views', 'mail-viewer');
 	}
 }

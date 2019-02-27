@@ -1,7 +1,7 @@
 # Laravel 5.5+ mail logger and viewer
 ### Easily log and view and search in browser outgoing emails.
 
-This package gives an ability to log all outgoing emails to a database and view them all from a browser.
+This package gives an ability to log all outgoing emails to a database and view them all from a browser like them will be shown in a modern mail clients (gmail, etc.).
 
 ## Installation
 
@@ -29,7 +29,7 @@ This will bootstrap the package into Laravel.
 php artisan vendor:publish --provider="MasterRO\MailViewer\Providers\MailViewerServiceProvider"
 ```
 
-You have to publish _**assets,**_ _configs_ are optional.
+You have to publish _**assets,**_ and _**views,**_ _configs_ are optional.
 
 
 ### Step 4: Run migrations
