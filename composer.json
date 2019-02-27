@@ -15,14 +15,14 @@
 		"log"
 	],
 	"require": {
-		"illuminate/support": "^5.5,<5.8",
-		"illuminate/events": "^5.5,<5.8",
-		"illuminate/database": "^5.5,<5.8",
-		"illuminate/routing": "^5.5,<5.8",
-		"illuminate/mail": "^5.5,<5.8"
+		"illuminate/support": "^5.5,<5.9",
+		"illuminate/events": "^5.5,<5.9",
+		"illuminate/database": "^5.5,<5.9",
+		"illuminate/routing": "^5.5,<5.9",
+		"illuminate/mail": "^5.5,<5.9"
 	},
 	"require-dev": {
-		"orchestra/testbench": "^3.5",
+		"orchestra/testbench": "^3.5,<3.9",
 		"phpunit/phpunit": "^6.5"
 	},
 	"autoload": {
