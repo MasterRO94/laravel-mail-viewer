@@ -31,11 +31,11 @@ class MailViewerServiceProvider extends EventServiceProvider
 
 		$this->publishes([
 			__DIR__ . '/../../config/mail-viewer.php' => config_path('mail-viewer.php'),
-		], 'config');
+		], 'mail-viewer-config');
 
 		$this->publishes([
 			__DIR__ . '/../../resources/views' => resource_path('views/vendor/mail-viewer'),
-		], 'views');
+		], 'mail-viewer-views');
 
 //		$this->publishes([
 //			__DIR__ . '/../../database/migrations/' => database_path('migrations'),
@@ -47,7 +47,7 @@ class MailViewerServiceProvider extends EventServiceProvider
 
 		$this->publishes([
 			__DIR__ . '/../../public/' => public_path('vendor/mail-viewer'),
-		], 'assets');
+		], 'mail-viewer-assets');
 
 		$this->loadMigrationsFrom(__DIR__ . '/../../database/migrations/');
 
