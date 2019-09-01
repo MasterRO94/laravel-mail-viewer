@@ -6,14 +6,39 @@ namespace MasterRO\MailViewer\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class MailLog
+ *
+ * @package MasterRO\MailViewer\Models
+ */
 class MailLog extends Model
 {
+	/**
+	 * Timestamps
+	 *
+	 * @var bool
+	 */
 	public $timestamps = false;
 
+	/**
+	 * Guarded
+	 *
+	 * @var array
+	 */
 	protected $guarded = ['id'];
 
+	/**
+	 * Dates
+	 *
+	 * @var array
+	 */
 	protected $dates = ['date'];
 
+	/**
+	 * Casts
+	 *
+	 * @var array
+	 */
 	protected $casts = [
 		'from' => 'object',
 		'to'   => 'object',
@@ -21,8 +46,12 @@ class MailLog extends Model
 		'bcc'  => 'object',
 	];
 
+	/**
+	 * Appends
+	 *
+	 * @var array
+	 */
 	protected $appends = ['formattedTo', 'formattedFrom', 'formattedCc', 'formattedBcc', 'formattedDate'];
-
 
 	/**
 	 * MailLog constructor.
@@ -34,8 +63,8 @@ class MailLog extends Model
 		parent::__construct($attributes);
 
 		$this->setTable(config('mail-viewer.table', 'mail_logs'));
+		$this->setConnection(config('mail-viewer.connection', config('database.default')));
 	}
-
 
 	/**
 	 * @return string
@@ -45,7 +74,6 @@ class MailLog extends Model
 		return $this->formattedAddress('from');
 	}
 
-
 	/**
 	 * @return string
 	 */
@@ -53,7 +81,6 @@ class MailLog extends Model
 	{
 		return $this->formattedAddress('to');
 	}
-
 
 	/**
 	 * @return string
@@ -71,7 +98,6 @@ class MailLog extends Model
 		return $this->formattedAddress('bcc');
 	}
 
-
 	/**
 	 * @param string $field
 	 *
@@ -84,7 +110,6 @@ class MailLog extends Model
 				. " &lt;<span class=\"mail-item-email\">{$mailbox->email}</span>&gt;";
 		})->implode(', ');
 	}
-
 
 	/**
 	 * @return mixed

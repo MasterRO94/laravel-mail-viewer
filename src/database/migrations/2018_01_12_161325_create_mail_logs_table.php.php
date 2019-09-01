@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+/**
+ * Class CreateMailLogsTable
+ */
 class CreateMailLogsTable extends Migration
 {
 	/**
@@ -15,7 +18,7 @@ class CreateMailLogsTable extends Migration
 	 */
 	public function up()
 	{
-		Schema::create(config('mail-viewer.table', 'mail_logs'), function (Blueprint $table) {
+		Schema::create((string)config('mail-viewer.table', 'mail_logs'), function (Blueprint $table) {
 			$table->increments('id');
 
 			$table->json('from')->nullable();
@@ -30,7 +33,6 @@ class CreateMailLogsTable extends Migration
 			$table->timestamp('date');
 		});
 	}
-
 
 	/**
 	 * Reverse the migrations.
