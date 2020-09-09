@@ -28,7 +28,7 @@ This will bootstrap the package into Laravel.
 ### Step 3: Publish Configs
 
 ```
-php artisan mail-viewer:publish"
+php artisan mail-viewer:publish
 ```
 
 You have to publish _**assets,**_ and _**views,**_ _configs_ are optional.
