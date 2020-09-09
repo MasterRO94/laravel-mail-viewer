@@ -28,7 +28,7 @@ This will bootstrap the package into Laravel.
 ### Step 3: Publish Configs
 
 ```
-php artisan vendor:publish --provider="MasterRO\MailViewer\Providers\MailViewerServiceProvider"
+php artisan mail-viewer:publish"
 ```
 
 You have to publish _**assets,**_ and _**views,**_ _configs_ are optional.
@@ -41,4 +41,4 @@ php artisan migrate
 ```
 
 ### Step 5: View emails
-All ongoing emails would be displayed on `/_mail-viewer` page by default.
+All ongoing emails you can find on `/_mail-viewer` page. Url 
