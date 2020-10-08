@@ -1,3 +1,19 @@
+<p align="center">
+    <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg">
+</p>
+
+<p align="center">
+    <a href="https://packagist.org/packages/masterro/laravel-mail-viewer">
+        <img src="https://img.shields.io/packagist/v/masterro/laravel-mail-viewer.svg?style=flat-rounded" alt="Latest Stable Version">
+    </a>
+    <a href="https://packagist.org/packages/masterro/laravel-mail-viewer">
+        <img src="https://img.shields.io/packagist/dt/masterro/laravel-mail-viewer.svg?style=flat-rounded" alt="Total Downloads">
+    </a>
+    <a href="https://github.com/MasterRO94/laravel-mail-viewer/blob/master/LICENSE">
+        <img src="https://img.shields.io/github/license/MasterRO94/laravel-mail-viewer" alt="License">
+    </a>
+</p>
+
 # Laravel 5.5+ mail logger and viewer
 ### Easily log and view and search in browser outgoing emails.
 
