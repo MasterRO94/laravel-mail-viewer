@@ -57,4 +57,4 @@ php artisan migrate
 ```
 
 ### Step 5: View emails
-All ongoing emails you can find on `/_mail-viewer` page. Url 
+All ongoing emails you can find on `/_mail-viewer` page. 
