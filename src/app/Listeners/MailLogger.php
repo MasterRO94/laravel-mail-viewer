@@ -19,19 +19,17 @@ class MailLogger
     {
         $message = $event->message;
 
-        MailLog::make()
-            ->forceFill([
-                'from'        => $this->addressField($message, 'From'),
-                'to'          => $this->addressField($message, 'To'),
-                'cc'          => $this->addressField($message, 'Cc'),
-                'bcc'         => $this->addressField($message, 'Bcc'),
-                'subject'     => $message->getSubject(),
-                'body'        => $message->getBody(),
-                'headers'     => (string) $message->getHeaders(),
-                'attachments' => $message->getChildren() ? implode("\n\n", $message->getChildren()) : null,
-                'date'        => now()->toDateTimeString(),
-            ])
-            ->save();
+        MailLog::create([
+            'from'        => $this->addressField($message, 'From'),
+            'to'          => $this->addressField($message, 'To'),
+            'cc'          => $this->addressField($message, 'Cc'),
+            'bcc'         => $this->addressField($message, 'Bcc'),
+            'subject'     => $message->getSubject(),
+            'body'        => $message->getBody(),
+            'headers'     => (string) $message->getHeaders(),
+            'attachments' => $message->getChildren() ? implode("\n\n", $message->getChildren()) : null,
+            'date'        => now()->toDateTimeString(),
+        ]);
     }
 
     /**

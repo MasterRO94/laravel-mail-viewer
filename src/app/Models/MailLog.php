@@ -13,19 +13,14 @@ use Illuminate\Database\Eloquent\Model;
  */
 class MailLog extends Model
 {
+    protected static $unguarded = true;
+
 	/**
 	 * Timestamps
 	 *
 	 * @var bool
 	 */
 	public $timestamps = false;
-
-	/**
-	 * Guarded
-	 *
-	 * @var array
-	 */
-	protected $guarded = ['id'];
 
 	/**
 	 * Dates
