@@ -10,6 +10,8 @@ class TestMailable extends Mailable
 {
     public function build()
     {
-        $this->view('view');
+        $this
+            ->subject('Test mail')
+            ->view('view');
     }
 }

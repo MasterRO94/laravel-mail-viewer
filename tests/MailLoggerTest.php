@@ -66,6 +66,7 @@ class MailLoggerTest extends TestCase
 
         $logEntry = MailLog::latest('id')->first();
         $this->assertEquals('igoshin18@gmail.com', $logEntry->to[0]->email);
+        $this->assertEquals('Test mail', $logEntry->subject);
         $this->assertEquals('Roman Ihoshyn', $logEntry->to[0]->name);
         $this->assertEquals('cc@email.com', $logEntry->cc[0]->email);
         $this->assertEquals('Email CC', $logEntry->cc[0]->name);
