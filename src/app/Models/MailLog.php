@@ -15,30 +15,15 @@ class MailLog extends Model
 {
     protected static $unguarded = true;
 
-    /**
-     * Timestamps
-     *
-     * @var bool
-     */
     public $timestamps = false;
 
-    /**
-     * Dates
-     *
-     * @var array
-     */
-    protected $dates = ['date'];
-
-    /**
-     * Casts
-     *
-     * @var array
-     */
     protected $casts = [
         'from'        => 'object',
         'to'          => 'object',
         'cc'          => 'object',
         'bcc'         => 'object',
+        'date'        => 'datetime',
+        'headers'     => 'array',
         'attachments' => 'array',
     ];
 
@@ -47,13 +32,10 @@ class MailLog extends Model
      *
      * @var array
      */
-    protected $appends = ['formattedTo', 'formattedFrom', 'formattedCc', 'formattedBcc', 'formattedDate'];
+    protected $appends = [
+        'formattedTo', 'formattedFrom', 'formattedCc', 'formattedBcc', 'formattedDate', 'formattedTime',
+    ];
 
-    /**
-     * MailLog constructor.
-     *
-     * @param array $attributes
-     */
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
@@ -62,44 +44,27 @@ class MailLog extends Model
         $this->setConnection(config('mail-viewer.connection', config('database.default')));
     }
 
-    /**
-     * @return string
-     */
-    public function getFormattedFromAttribute()
+    public function getFormattedFromAttribute(): string
     {
         return $this->formattedAddress('from');
     }
 
-    /**
-     * @return string
-     */
-    public function getFormattedToAttribute()
+    public function getFormattedToAttribute(): string
     {
         return $this->formattedAddress('to');
     }
 
-    /**
-     * @return string
-     */
-    public function getFormattedCcAttribute()
+    public function getFormattedCcAttribute(): string
     {
         return $this->formattedAddress('cc');
     }
 
-    /**
-     * @return string
-     */
-    public function getFormattedBccAttribute()
+    public function getFormattedBccAttribute(): string
     {
         return $this->formattedAddress('bcc');
     }
 
-    /**
-     * @param string $field
-     *
-     * @return string
-     */
-    public function formattedAddress(string $field)
+    public function formattedAddress(string $field): string
     {
         return collect($this->{$field})->map(function ($mailbox) {
             return ($mailbox->name ? "<span class=\"mail-item-name\">{$mailbox->name}</span>" : '')
@@ -107,11 +72,13 @@ class MailLog extends Model
         })->implode(', ');
     }
 
-    /**
-     * @return mixed
-     */
-    public function getFormattedDateAttribute()
+    public function getFormattedDateAttribute(): string
     {
         return $this->date->format(config('mail-viewer.date_format'));
+    }
+
+    public function getFormattedTimeAttribute(): string
+    {
+        return $this->date->format(config('mail-viewer.time_format'));
     }
 }

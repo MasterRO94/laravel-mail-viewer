@@ -1,45 +1,24 @@
-@extends('mail-viewer::layouts.app')
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+  >
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>
+    {{ config('app.name', 'Laravel') }} - Mail Viewer
+  </title>
 
-@section('content')
-	<div class="flex mb-4">
-		@include('mail-viewer::mails._sidebar')
-
-		<main class="w-3/4 px-2">
-			<div v-if="currentMail" v-cloak>
-				<header class="text-base px-2 py-2">
-					<h3 class="mb-2 text-grey-darkest" v-text="currentMail.subject"></h3>
-					<p class="text-sm">
-						<strong>From:</strong>
-						<span class="text-grey-darkest" v-html="currentMail.formattedFrom"></span>
-					</p>
-					<p class="text-sm mt-1">
-						<strong>To:</strong>
-						<span class="text-grey-darkest" v-html="currentMail.formattedTo"></span>
-					</p>
-					<p class="text-sm mt-1" v-show="currentMail.formattedCc">
-						<strong>Cc:</strong>
-						<span class="text-grey-darkest" v-html="currentMail.formattedCc"></span>
-					</p>
-					<p class="text-sm mt-1" v-show="currentMail.formattedBcc">
-						<strong>Bcc:</strong>
-						<span class="text-grey-darkest" v-html="currentMail.formattedBcc"></span>
-					</p>
-				</header>
-				<tabs>
-					<tab name="Preview">
-						<iframe :srcdoc="currentMail.body"
-						        frameborder="0"
-						        width="100%"
-						        height="600px"
-						></iframe>
-					</tab>
-					<tab name="HTML">
-						<div class="overflow-x-scroll">
-							<pre class="text-xs"><code v-text="currentMail.body"></code></pre>
-						</div>
-					</tab>
-				</tabs>
-			</div>
-		</main>
-	</div>
-@endsection
+  <link rel="stylesheet" href="{{ asset('vendor/mail-viewer/css/app.css') }}">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Tangerine&family=Nunito+Sans:ital,wght@0,400;0,600;0,800;1,400&family=Rajdhani:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+</head>
+<body class="box-border bg-gray-200 scroll-smooth">
+  <div id="app"></div>
+<script src="{{ asset('vendor/mail-viewer/js/app.js') }}"></script>
+</body>
+</html>
