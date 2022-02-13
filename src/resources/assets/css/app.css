@@ -1,3 +1,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+aside .mail-item-email {
+  @apply text-blue-400 transition;
+}
+aside .group.is-active .mail-item-email {
+  @apply text-gray-50 transition;
+}
+
+aside .group:hover:not(.is-active) .mail-item-email {
+  @apply text-indigo-600 transition;
+}

@@ -1,5 +1,5 @@
 <template>
-  <aside class="flex-col space-y-2 w-1/3 overflow-y-auto h-screen">
+  <aside class="flex-col space-y-2 w-1/4 overflow-y-auto h-screen sticky top-1">
     <section
       v-for="email of emails"
       :key="`email-${email.id}`"
@@ -9,7 +9,7 @@
         "
       :class="
           currentEmail?.id === email.id
-            ? 'text-slate-100 bg-indigo-400 pl-[8px] border-b-indigo-300 border-l-4 border-indigo-500'
+            ? 'text-slate-100 bg-indigo-400 pl-[8px] border-b-indigo-300 border-l-4 border-indigo-500 is-active'
             :'pl-[12px] bg-sky-100  text-gray-700 border-b border-solid border-indigo-300'
         "
       @click="show(email)"
@@ -24,6 +24,9 @@
           <div
             class="pt-[0.2rem]"
             v-text="email.formattedDate"
+          />
+          <div
+            v-text="email.formattedTime"
           />
         </div>
       </div>
@@ -47,12 +50,6 @@
               v-html="recipient"
             />
           </div>
-        </div>
-
-        <div class="text-right text-sm ml-2">
-          <div
-            v-text="email.formattedTime"
-          />
         </div>
       </div>
     </section>

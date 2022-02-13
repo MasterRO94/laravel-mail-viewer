@@ -1,7 +1,7 @@
 <template>
   <section
     role="preview"
-    class="w-full px-3"
+    class="w-3/4 px-3"
   >
     <section class="mb-4">
       <div
@@ -68,14 +68,16 @@
       <tab name="HTML">
         <div class="p-3 bg-gray-200 rounded">
           <pre
-            v-text="email.body"
+            v-highlightjs
             class="text-slate-800 overflow-auto"
-          />
+          >
+            <code class="html">{{ email.body }}</code>
+          </pre>
         </div>
       </tab>
 
       <tab name="Body">
-        <div class="p-3 bg-gray-200 rounded h-screen">
+        <div class="p-3 bg-gray-200 rounded min-h-screen">
           <pre
             v-text="email.payload"
             class="text-slate-800 overflow-auto"
