@@ -58,3 +58,21 @@ php artisan migrate
 
 ### Step 5: View emails
 All ongoing emails you can find on `/_mail-viewer` page. 
+
+## Cleanup
+
+Old mail logs can be deleted with the artisan command `mail-viewer:cleanup`:
+
+This will delete all mail logs older than 5 days:
+
+```
+php artisan mail-viewer:cleanup 5
+```
+
+If you want to cleanup mails regularily, you can add the command to the Laravel scheduler in `app/Console/Kernel.php`:
+
+```php
+// function schedule()
+$schedule->command('mail-viewer:cleanup 5 --force')->daily();
+
+```
