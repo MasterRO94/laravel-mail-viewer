@@ -2,11 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+.preview-header .mail-item-email {
+  @apply text-indigo-600 transition;
+}
+
 aside .mail-item-email {
   @apply text-blue-400 transition;
 }
+
 aside .group.is-active .mail-item-email {
-  @apply text-gray-50 transition;
+  @apply text-cyan-100 transition;
 }
 
 aside .group:hover:not(.is-active) .mail-item-email {
