@@ -5,6 +5,7 @@ namespace MasterRO\MailViewer\Providers;
 use Illuminate\Mail\Events\MessageSending;
 use MasterRO\MailViewer\Listeners\MailLogger;
 use MasterRO\MailViewer\Commands\PublishCommand;
+use MasterRO\MailViewer\Commands\CleanupCommand;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 
 class MailViewerServiceProvider extends EventServiceProvider
@@ -26,6 +27,7 @@ class MailViewerServiceProvider extends EventServiceProvider
 
         $this->commands([
             PublishCommand::class,
+            CleanupCommand::class,
         ]);
     }
 
