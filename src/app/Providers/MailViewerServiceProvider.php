@@ -65,7 +65,7 @@ class MailViewerServiceProvider extends EventServiceProvider
 
         $this->publishes([
             __DIR__ . '/../../resources/views' => resource_path('views/vendor/mail-viewer'),
-        ], ['mail-viewer-views', 'laravel-assets']);
+        ], ['mail-viewer-views']);
 
         $this->publishes([
             __DIR__ . '/../../public/' => public_path('vendor/mail-viewer'),

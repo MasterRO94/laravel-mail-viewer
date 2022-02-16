@@ -644,23 +644,14 @@ select {
 .top-0 {
   top: 0px;
 }
-.right-5 {
-  right: 1.25rem;
-}
-.top-5 {
-  top: 1.25rem;
+.top-\[0\.7rem\] {
+  top: 0.7rem;
 }
 .right-4 {
   right: 1rem;
 }
-.top-4 {
-  top: 1rem;
-}
-.top-\[0\.8rem\] {
-  top: 0.8rem;
-}
-.top-\[0\.7rem\] {
-  top: 0.7rem;
+.top-2 {
+  top: 0.5rem;
 }
 .z-10 {
   z-index: 10;
@@ -755,9 +746,6 @@ select {
 }
 .w-7 {
   width: 1.75rem;
-}
-.w-1\/12 {
-  width: 8.333333%;
 }
 .max-w-sm {
   max-width: 24rem;
@@ -939,14 +927,14 @@ select {
 .p-2 {
   padding: 0.5rem;
 }
-.p-3 {
-  padding: 0.75rem;
-}
 .p-1\.5 {
   padding: 0.375rem;
 }
 .p-1 {
   padding: 0.25rem;
+}
+.p-3 {
+  padding: 0.75rem;
 }
 .px-2 {
   padding-left: 0.5rem;
@@ -982,9 +970,6 @@ select {
 }
 .pl-\[12px\] {
   padding-left: 12px;
-}
-.pl-1 {
-  padding-left: 0.25rem;
 }
 .pr-1 {
   padding-right: 0.25rem;
@@ -1039,9 +1024,6 @@ select {
 .font-bold {
   font-weight: 700;
 }
-.font-medium {
-  font-weight: 500;
-}
 .capitalize {
   text-transform: capitalize;
 }
@@ -1068,13 +1050,13 @@ select {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
 }
-.text-slate-800 {
-  --tw-text-opacity: 1;
-  color: rgb(30 41 59 / var(--tw-text-opacity));
-}
 .text-indigo-400 {
   --tw-text-opacity: 1;
   color: rgb(129 140 248 / var(--tw-text-opacity));
+}
+.text-slate-800 {
+  --tw-text-opacity: 1;
+  color: rgb(30 41 59 / var(--tw-text-opacity));
 }
 .text-indigo-600 {
   --tw-text-opacity: 1;
@@ -1168,10 +1150,6 @@ aside .group:hover:not(.is-active) .mail-item-email {
   transition-duration: 150ms;
 }
 
-.hover\:visible:hover {
-  visibility: visible;
-}
-
 .hover\:border-l-4:hover {
   border-left-width: 4px;
 }
@@ -1251,10 +1229,6 @@ aside .group:hover:not(.is-active) .mail-item-email {
 
 .focus\:outline-indigo-600:focus {
   outline-color: #4f46e5;
-}
-
-.group:hover .group-hover\:visible {
-  visibility: visible;
 }
 
 .group:hover .group-hover\:block {

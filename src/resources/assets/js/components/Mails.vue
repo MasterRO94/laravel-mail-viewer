@@ -52,7 +52,9 @@ export default {
         data.page = response.data['current_page'];
         data.emails = merge ? [...data.emails, ...response.data.data] : response.data.data;
         data.hasMorePages = response.data['last_page'] > data.page;
-        data.currentEmail = data.emails?.[0];
+        data.currentEmail = data.currentEmail && data.emails.find((email) => email.id === data.currentEmail.id)
+          ? data.currentEmail
+          : data.emails?.[0];
 
         loading.value = false;
       }

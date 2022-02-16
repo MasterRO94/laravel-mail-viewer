@@ -26,13 +26,21 @@
           <span class="text-gray-700">
             {{ recipient.name }}
           </span>
-          &lt;<a :href="`mailto:${recipient.email}`" class="mail-item-email hover:underline">{{ recipient.email }}</a>&gt;{{ i < recipients.length - 1 ? ',' : '' }}&nbsp;
+          &lt;<a
+            :href="`mailto:${recipient.email}`"
+            target="_blank"
+            class="mail-item-email hover:underline"
+        >{{ recipient.email }}</a>&gt;{{ i < recipients.length - 1 ? ',' : '' }}&nbsp;
         </span>
 
         <span
           v-else
         >
-          <a :href="`mailto:${recipient.email}`" class="mail-item-email hover:underline">{{ recipient.email }}</a>{{ i < recipients.length - 1 ? ',' : '' }}&nbsp;
+          <a
+            :href="`mailto:${recipient.email}`"
+            target="_blank"
+            class="mail-item-email hover:underline"
+          >{{ recipient.email }}</a>{{ i < recipients.length - 1 ? ',' : '' }}&nbsp;
         </span>
       </span>
     </div>

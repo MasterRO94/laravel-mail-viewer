@@ -18,7 +18,10 @@
   >
 </head>
 <body class="box-border bg-gray-200 scroll-smooth">
-  <div id="app"></div>
+<div
+  id="app"
+  data-app-name="{{ config('app.name', 'Laravel') }}"
+></div>
 <script src="{{ asset('vendor/mail-viewer/js/app.js') }}"></script>
 </body>
 </html>

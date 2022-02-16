@@ -18,7 +18,7 @@
       </span>
 
       <p class="text-3xl px-3 pt-[0.5rem]">
-        Outbound Emails
+        Outbound Emails - <small v-text="appName" />
       </p>
     </div>
 
@@ -29,3 +29,7 @@
     </div>
   </header>
 </template>
+
+<script setup>
+const appName = document.querySelector('#app').dataset.appName;
+</script>

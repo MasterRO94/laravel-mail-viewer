@@ -1,6 +1,6 @@
 <template>
   <section class="flex justify-between">
-    <div class="p-2 pl-1 w-full relative group">
+    <div class="mb-4 p-1 w-full relative group">
       <input
         type="text"
         name="search"
@@ -16,7 +16,7 @@
       <span
         v-show="search"
         class="
-          absolute top-[0.7rem] right-4 text-indigo-600 font-bold text-2xl cursor-pointer
+          absolute top-2 right-4 text-indigo-600 font-bold text-2xl cursor-pointer
           hidden group-hover:block hover:opacity-90
         "
         @click="clearSearch"
