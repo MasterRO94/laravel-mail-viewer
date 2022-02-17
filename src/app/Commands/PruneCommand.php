@@ -16,7 +16,7 @@ class PruneCommand extends Command
     public function handle(): int
     {
         $this->call('model:prune', [
-            '----model' => MailLog::class,
+            '--model' => MailLog::class,
         ]);
 
         return static::SUCCESS;

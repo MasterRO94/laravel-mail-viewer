@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -13,6 +14,8 @@ return new class extends Migration {
     public function up(): void
     {
         $table = config('mail-viewer.table', 'mail_logs');
+
+        Artisan::call('mail-viewer:prune');
 
         DB::table($table)
             ->latest('date')
