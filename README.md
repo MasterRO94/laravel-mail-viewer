@@ -18,7 +18,7 @@
 
 ### Easily log, view and search in browser all outgoing emails.
 
-![preview](https://github.com/MasterRO94/packages/blob/master/mail-viewer/Mail%20Viewer%20Test%20App%20-%20Mail%20Viewer%202020-03-03%2014-02-25.png "Preview")
+![preview](https://github.com/MasterRO94/packages/blob/master/mail-viewer/Mail%20Viewer%20V2.png "Preview")
 
 This package gives an ability to log all outgoing emails to a database and view them all from a browser like they will
 be shown in a modern mail clients (gmail, etc.).
