@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table((string) config('mail-viewer.table', 'mail_logs'), function (Blueprint $table) {
-            $table->longText('payload')->after('attachments');
+            $table->longText('payload')->after('attachments')->default('');
         });
     }
 
