@@ -8,7 +8,7 @@
     <div
       v-for="(recipients, key) of {from: email.from, to: email.to, cc: email.cc, bcc: email.bcc}"
       :key="`currentEmail-${email.id}-${key}`"
-      v-show="recipients.length"
+      v-show="recipients?.length"
     >
       <strong
         class="capitalize text-gray-700"
