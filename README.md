@@ -45,7 +45,7 @@ You should update the dependency in your application's composer.json file:
 
 #### Database migrations
 
-Run package migrations:
+Run package migrations (requires `doctrine/dbal` to be installed):
 
 ```shell
 php artisan migrate
@@ -56,7 +56,7 @@ php artisan migrate
 Run publish command:
 
 ```shell
-php artisan mail-viewer:publish
+php artisan mail-viewer:publish --views
 ```
 
 #### Update configs
@@ -77,7 +77,11 @@ V2 allows prune old records easily using `mail-viewer:prune` command. You can ad
 $schedule->command('mail-viewer:prune')->daily();
 ```
 
-You can specify how many days data will be stored before pruning using config. Default value is 7 days.
+You can specify how many days data will be stored before pruning using config. Default value is 31 days.
+
+```php
+'prune_older_than_days' => 31,
+```
 
 ## Installation
 
@@ -105,8 +109,7 @@ php artisan migrate
 
 ### Step 4: View emails
 
-All ongoing emails you can find on `/_mail-viewer` page. 
-
+All ongoing emails you can find on `/_mail-viewer` page.
 
 ## Configuration
 

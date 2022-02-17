@@ -4,39 +4,13 @@ declare(strict_types=1);
 
 namespace MasterRO\MailViewer\Tests;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\View;
 use MasterRO\MailViewer\Models\MailLog;
-use MasterRO\MailViewer\Providers\MailViewerServiceProvider;
 use MasterRO\MailViewer\Tests\TestObjects\TestMailable;
 use MasterRO\MailViewer\Tests\TestObjects\TestMailableWithAttachments;
-use Orchestra\Testbench\TestCase;
 
-class MailLoggerTest extends TestCase
+class MailLoggerTest extends BaseTestCase
 {
-    use RefreshDatabase;
-
-    protected function getPackageProviders($app)
-    {
-        return [
-            MailViewerServiceProvider::class,
-        ];
-    }
-
-    protected function getEnvironmentSetUp($app)
-    {
-        $app['config']->set('mail.driver', 'array');
-        $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
-            'driver'   => 'sqlite',
-            'database' => ':memory:',
-            'prefix'   => '',
-        ]);
-
-        View::addLocation(__DIR__ . '/Fixtures');
-    }
-
     public function test_it_logs_mailable_recipients(): void
     {
         Mail::to('igoshin18@gmail.com')->send(new TestMailable());
@@ -44,25 +18,7 @@ class MailLoggerTest extends TestCase
         $logEntry = MailLog::latest('id')->first();
         $this->assertEquals('igoshin18@gmail.com', $logEntry->to[0]->email);
 
-        Mail::to([
-            [
-                'email' => 'igoshin18@gmail.com',
-                'name'  => 'Roman Ihoshyn',
-            ],
-        ])
-            ->cc([
-                [
-                    'email' => 'cc@email.com',
-                    'name'  => 'Email CC',
-                ],
-            ])
-            ->bcc([
-                [
-                    'email' => 'bcc@email.com',
-                    'name'  => 'Email BCC',
-                ],
-            ])
-            ->send(new TestMailable());
+        $this->sendTestEmails();
 
         $logEntry = MailLog::latest('id')->first();
         $this->assertEquals('igoshin18@gmail.com', $logEntry->to[0]->email);
