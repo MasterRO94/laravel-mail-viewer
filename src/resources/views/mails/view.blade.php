@@ -1,1 +1,0 @@
-{!! $mailLog->body !!}

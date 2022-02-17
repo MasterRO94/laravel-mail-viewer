@@ -4,43 +4,45 @@ declare(strict_types=1);
 
 namespace MasterRO\MailViewer\Controllers;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\View\View;
 use MasterRO\MailViewer\Models\MailLog;
+use MasterRO\MailViewer\Services\Resource;
 
-/**
- * Class MailController
- *
- * @package MasterRO\MailViewer\Controllers
- */
 class MailController extends Controller
 {
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function index()
+    public function __construct(protected Resource $mails)
+    {
+    }
+
+    public function index(): View
     {
         return view('mail-viewer::mails.index');
     }
 
-    /**
-     * Emails
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function emails()
+    public function emails(Request $request): JsonResponse
     {
-        $mails = MailLog::latest('date')->paginate(config('mail-viewer.emails_per_page', 20));
-
-        return response()->json(['success' => true, 'data' => $mails]);
+        return response()->json([
+            'success' => true,
+            'data'    => $this->mails->fetch($request),
+        ]);
     }
 
-    /**
-     * @param MailLog $mailLog
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function show(MailLog $mailLog)
+    public function stats(): JsonResponse
     {
-        return view('mail-viewer::mails.view', compact('mailLog'));
+        return response()->json([
+            'success' => true,
+            'data'    => $this->mails->stats(),
+        ]);
+    }
+
+    public function payload(MailLog $mailLog): JsonResponse
+    {
+        return response()->json([
+            'success' => true,
+            'data'    => $mailLog->payload,
+        ]);
     }
 }

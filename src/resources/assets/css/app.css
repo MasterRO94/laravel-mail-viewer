@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.preview-header .mail-item-email {
+  @apply text-indigo-600 transition;
+}
+
+aside .mail-item-email {
+  @apply text-blue-400 transition;
+}
+
+aside .group.is-active .mail-item-email {
+  @apply text-cyan-100 transition;
+}
+
+aside .group:hover:not(.is-active) .mail-item-email {
+  @apply text-indigo-600 transition;
+}
+
+.ease-out-enter-active,
+.ease-out-leave-active {
+  @apply opacity-90 translate-y-0 duration-200;
+}
+
+.ease-out-enter-from,
+.ease-out-leave-to {
+  @apply ease-in opacity-0 -translate-y-4 duration-200;
+}
