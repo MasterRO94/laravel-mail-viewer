@@ -1,5 +1,5 @@
 <template>
-  <main class="flex mt-3">
+  <main class="flex my-3">
     <Sidebar
       :emails="data.emails"
       :current-email="data.currentEmail"
@@ -25,8 +25,8 @@ import {
   ref,
 } from 'vue';
 import Api from '../../api/Api';
-import Preview from '../Mails/Preview';
-import Sidebar from '../Mails/Sidebar';
+import Preview from '../Main/Preview';
+import Sidebar from '../Main/Sidebar';
 
 export default {
   components: { Preview, Sidebar },

@@ -62,6 +62,6 @@ export default {
     return {
       attachments,
     };
-  }
+  },
 };
 </script>

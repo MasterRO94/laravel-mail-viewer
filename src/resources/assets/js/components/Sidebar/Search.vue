@@ -14,7 +14,7 @@
           class="
             w-full rounded-md border-0 outline-indigo-400 outline outline-offset-0 outline-2
             focus:outline-indigo-600 focus:outline-offset-0 focus:outline-2
-            hover:outline-indigo-500
+            hover:outline-indigo-500 text-slate-600
           "
         >
         <span
@@ -63,12 +63,12 @@
         action="#"
         target="_self"
         @submit.prevent="filter"
-        class="mb-4 p-1 flex group space-x-2"
+        class="mb-4 py-1 -mx-2 flex group"
       >
-        <div class="flex flex-col">
+        <div class="flex flex-col w-1/2 px-3">
           <label
             for="filter_date_from"
-            class="text-sm text-slate-700"
+            class="text-sm text-slate-600"
           >
             Date From
           </label>
@@ -82,16 +82,16 @@
             class="
               rounded-md border-0 outline-indigo-400 outline outline-offset-0 outline-2
               focus:outline-indigo-600 focus:outline-offset-0 focus:outline-2
-              hover:outline-indigo-500
+              hover:outline-indigo-500 text-slate-700
             "
             @change="filter"
           >
         </div>
 
-        <div class="flex flex-col">
+        <div class="flex flex-col w-1/2 px-3">
           <label
             for="filter_date_to"
-            class="text-sm text-slate-700"
+            class="text-sm text-slate-600"
           >
             Date To
           </label>
@@ -105,7 +105,7 @@
             class="
               rounded-md border-0 outline-indigo-400 outline outline-offset-0 outline-2
               focus:outline-indigo-600 focus:outline-offset-0 focus:outline-2
-              hover:outline-indigo-500
+              hover:outline-indigo-500 text-slate-700
             "
             @change="filter"
           >
