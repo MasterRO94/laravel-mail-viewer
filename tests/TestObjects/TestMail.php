@@ -6,7 +6,7 @@ namespace MasterRO\MailViewer\Tests\TestObjects;
 
 use Illuminate\Mail\Mailable;
 
-class TestMailable extends Mailable
+class TestMail extends Mailable
 {
     public function build()
     {

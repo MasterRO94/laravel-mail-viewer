@@ -6,11 +6,12 @@ namespace MasterRO\MailViewer\Tests\TestObjects;
 
 use Illuminate\Mail\Mailable;
 
-class TestMailableWithAttachments extends Mailable
+class TestMailWithAttachments extends Mailable
 {
     public function build()
     {
         $this
+            ->subject('Test Mail With Attachments')
             ->attach(realpath(__DIR__ . '/../Fixtures/pdf-test.pdf'))
             ->attach(realpath(__DIR__ . '/../Fixtures/parrot.png'))
             ->view('view');

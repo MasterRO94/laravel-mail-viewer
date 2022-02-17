@@ -22,10 +22,10 @@ class MailLog extends Model
     public $timestamps = false;
 
     protected $casts = [
-        'from'        => 'array',
-        'to'          => 'array',
-        'cc'          => 'array',
-        'bcc'         => 'array',
+        'from'        => 'object',
+        'to'          => 'object',
+        'cc'          => 'object',
+        'bcc'         => 'object',
         'date'        => 'datetime',
         'headers'     => 'array',
         'attachments' => 'array',

@@ -6,14 +6,14 @@ namespace MasterRO\MailViewer\Tests;
 
 use Illuminate\Support\Facades\Mail;
 use MasterRO\MailViewer\Models\MailLog;
-use MasterRO\MailViewer\Tests\TestObjects\TestMailable;
-use MasterRO\MailViewer\Tests\TestObjects\TestMailableWithAttachments;
+use MasterRO\MailViewer\Tests\TestObjects\TestMail;
+use MasterRO\MailViewer\Tests\TestObjects\TestMailWithAttachments;
 
 class MailLoggerTest extends BaseTestCase
 {
     public function test_it_logs_mailable_recipients(): void
     {
-        Mail::to('igoshin18@gmail.com')->send(new TestMailable());
+        Mail::to('igoshin18@gmail.com')->send(new TestMail());
 
         $logEntry = MailLog::latest('id')->first();
         $this->assertEquals('igoshin18@gmail.com', $logEntry->to[0]->email);
@@ -32,8 +32,7 @@ class MailLoggerTest extends BaseTestCase
 
     public function test_it_logs_attachments(): void
     {
-        Mail::to('igoshin18@gmail.com')
-            ->send(new TestMailableWithAttachments());
+        Mail::to('igoshin18@gmail.com')->send(new TestMailWithAttachments());
 
         $logEntry = MailLog::latest('id')->first();
 

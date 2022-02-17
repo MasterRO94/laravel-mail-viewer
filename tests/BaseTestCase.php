@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\View;
 use MasterRO\MailViewer\Providers\MailViewerServiceProvider;
-use MasterRO\MailViewer\Tests\TestObjects\TestMailable;
+use MasterRO\MailViewer\Tests\TestObjects\TestMail;
 use Orchestra\Testbench\TestCase;
 
 class BaseTestCase extends TestCase
@@ -24,6 +24,7 @@ class BaseTestCase extends TestCase
 
     protected function getEnvironmentSetUp($app)
     {
+        $app['config']->set('app.key', 'base64:w1vzmDPOvle3Ky0aBWkjxiNAdXdTAiE8vAc7+9VYrVk=');
         $app['config']->set('mail.driver', 'array');
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
@@ -56,7 +57,7 @@ class BaseTestCase extends TestCase
                         'name'  => 'Email BCC',
                     ],
                 ])
-                ->send(new TestMailable());
+                ->send(new TestMail());
         }
     }
 }
