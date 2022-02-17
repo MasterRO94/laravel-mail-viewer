@@ -1,5 +1,5 @@
 <template>
-  <tab name="Headers">
+  <Tab name="Headers">
     <div class="p-3 bg-gray-200 space-y-2 rounded">
       <p
         v-for="(value, header) in email.headers"
@@ -10,7 +10,7 @@
         <span v-text="value" />
       </p>
     </div>
-  </tab>
+  </Tab>
 </template>
 
 <script>

@@ -1,11 +1,10 @@
 export default class Api {
-  static #abortController;
+  static #abortController = {};
 
-  static async fetchMails(params = {}) {
-    Api.#defineAbortController();
+  static async #request(url, params = {}) {
+    Api.#defineAbortController(url, params);
 
     let response;
-    let url = `${window.location.origin}${window.location.pathname}/emails?`;
 
     url += new URLSearchParams(params).toString();
     try {
@@ -14,7 +13,7 @@ export default class Api {
       });
     } catch (err) {
       if (err.name === 'AbortError') {
-        Api.#resetAbortController();
+        Api.#resetAbortController(url, params);
 
         return null;
       } else {
@@ -22,20 +21,46 @@ export default class Api {
       }
     }
 
-    Api.#resetAbortController();
+    Api.#resetAbortController(url, params);
 
     return response.json();
   }
 
-  static #defineAbortController() {
-    if (Api.#abortController) {
-      Api.#abortController.abort();
-    }
-
-    Api.#abortController = new AbortController();
+  static fetchMails(params = {}) {
+    return Api.#request(`${Api.baseUrl}/emails?`, params);
   }
 
-  static #resetAbortController() {
-    Api.#abortController = null;
+  static fetchStats() {
+    return Api.#request(`${Api.baseUrl}/stats`);
+  }
+
+  static async fetchPayload(email) {
+    const id = email.id ?? email;
+
+    return (await Api.#request(`${Api.baseUrl}/emails/${id}/payload`)).data;
+  }
+
+  static #defineAbortController(url, params) {
+    const key = this.#abortControllerKey(url, params);
+
+    if (Api.#abortController[key]) {
+      Api.#abortController[key].abort();
+    }
+
+    Api.#abortController[key] = new AbortController();
+  }
+
+  static #resetAbortController(url, params) {
+    const key = this.#abortControllerKey(url, params);
+
+    Api.#abortController[key] = null;
+  }
+
+  static #abortControllerKey(url, params) {
+    return JSON.stringify({ url, ...params });
+  }
+
+  static get baseUrl() {
+    return `${window.location.origin}${window.location.pathname}`;
   }
 }

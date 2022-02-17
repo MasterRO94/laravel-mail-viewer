@@ -1,5 +1,5 @@
 <template>
-  <tab name="HTML">
+  <Tab name="HTML">
     <div class="p-3 bg-gray-200 rounded">
       <pre
         v-highlightjs
@@ -8,7 +8,7 @@
         <code class="html">{{ email.body }}</code>
       </pre>
     </div>
-  </tab>
+  </Tab>
 </template>
 
 <script>

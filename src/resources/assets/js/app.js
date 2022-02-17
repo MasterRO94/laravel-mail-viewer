@@ -7,6 +7,6 @@ import App from './components/App.vue';
 window.VueApp = createApp(App);
 window.VueApp
   .use(VueHighlightJS)
-  .component('tabs', Tabs)
-  .component('tab', Tab)
+  .component('Tabs', Tabs)
+  .component('Tab', Tab)
   .mount('#app');

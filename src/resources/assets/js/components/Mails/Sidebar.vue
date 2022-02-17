@@ -1,6 +1,9 @@
 <template>
   <aside class="w-1/4 overflow-y-auto h-screen sticky top-1 pr-2">
-    <Search @search="onSearch" />
+    <Search
+      @search="onSearch"
+      @filter="onFilter"
+    />
 
     <section class="relative">
       <div
@@ -61,9 +64,9 @@
 </template>
 
 <script>
-import Recipients from './Sidebar/Recipients';
-import Search from './Sidebar/Search';
-import Subject from './Sidebar/Subject';
+import Recipients from '../Sidebar/Recipients';
+import Search from '../Sidebar/Search';
+import Subject from '../Sidebar/Subject';
 
 export default {
   components: { Search, Recipients, Subject },
@@ -103,6 +106,10 @@ export default {
       ctx.emit('search', term);
     };
 
+    const onFilter = (filters) => {
+      ctx.emit('filter', filters);
+    };
+
     const loadMore = () => {
       ctx.emit('loadMore');
     };
@@ -110,6 +117,7 @@ export default {
     return {
       show,
       onSearch,
+      onFilter,
       loadMore,
     };
   },

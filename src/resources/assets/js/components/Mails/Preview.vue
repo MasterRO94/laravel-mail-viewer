@@ -5,7 +5,7 @@
   >
     <Header :email="email" />
 
-    <tabs
+    <Tabs
       :options="{useUrlFragment: false}"
       nav-class="flex pl-6 space-x-3"
       nav-item-class="px-3 py-2 border border-b-0 border-solid border-indigo-200 rounded-t text-slate-500 bg-gray-200 transition"
@@ -15,20 +15,20 @@
       <PreviewTab :email="email" />
       <HtmlTab :email="email" />
       <HeadersTab :email="email" />
-      <BodyTab :email="email" />
-    </tabs>
+      <PayloadTab :email="email" />
+    </Tabs>
   </section>
 </template>
 
 <script>
-import BodyTab from './Preview/BodyTab';
-import Header from './Preview/Header';
-import HeadersTab from './Preview/HeadersTab';
-import HtmlTab from './Preview/HtmlTab';
-import PreviewTab from './Preview/PreviewTab';
+import PayloadTab from '../Preview/PayloadTab';
+import Header from '../Preview/Header';
+import HeadersTab from '../Preview/HeadersTab';
+import HtmlTab from '../Preview/HtmlTab';
+import PreviewTab from '../Preview/PreviewTab';
 
 export default {
-  components: { BodyTab, HeadersTab, HtmlTab, Header, PreviewTab },
+  components: { PayloadTab, HeadersTab, HtmlTab, Header, PreviewTab },
   props: {
     email: {
       type: Object,

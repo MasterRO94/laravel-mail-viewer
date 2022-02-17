@@ -7,6 +7,7 @@
       :has-more-pages="data.hasMorePages"
       @show="show"
       @search="onSearch"
+      @filter="onFilter"
       @loadMore="loadMore"
     />
 
@@ -23,9 +24,9 @@ import {
   reactive,
   ref,
 } from 'vue';
-import Api from '../api/Api';
-import Preview from './Preview';
-import Sidebar from './Sidebar';
+import Api from '../../api/Api';
+import Preview from '../Mails/Preview';
+import Sidebar from '../Mails/Sidebar';
 
 export default {
   components: { Preview, Sidebar },
@@ -33,6 +34,7 @@ export default {
   setup() {
     const loading = ref(true);
     const search = ref('');
+    const filters = ref({});
 
     const data = reactive({
       emails: [],
@@ -45,6 +47,7 @@ export default {
       loading.value = true;
 
       params.search = search.value;
+      Object.entries(filters.value).forEach(([key, value]) => params[key] = value);
 
       const response = await Api.fetchMails(params);
 
@@ -85,6 +88,11 @@ export default {
       await loadEmails();
     };
 
+    const onFilter = async (params) => {
+      filters.value = params;
+      await loadEmails();
+    };
+
     const loadMore = async () => {
       await loadEmails({ page: data.page + 1 }, true);
     };
@@ -94,6 +102,7 @@ export default {
       data,
       show,
       onSearch,
+      onFilter,
       loadMore,
     };
   },

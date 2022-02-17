@@ -7,5 +7,5 @@ return [
     'date_format'           => 'd.m.Y',
     'time_format'           => 'H:i:s',
     'emails_per_page'       => 2,
-    'prune_older_than_days' => 7,
+    'prune_older_than_days' => 31,
 ];
