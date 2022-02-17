@@ -41,5 +41,10 @@
 				"MasterRO\\MailViewer\\Providers\\MailViewerServiceProvider"
 			]
 		}
+	},
+	"scripts": {
+		"post-package-update": [
+			"@php new-version-available.php"
+		]
 	}
 }
