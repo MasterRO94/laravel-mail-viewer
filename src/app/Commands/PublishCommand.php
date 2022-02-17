@@ -6,21 +6,16 @@ namespace MasterRO\MailViewer\Commands;
 
 use Illuminate\Console\Command;
 
-/**
- * Class PublishCommand
- *
- * @package MasterRO\MailViewer\Commands
- */
 class PublishCommand extends Command
 {
     protected $signature = 'mail-viewer:publish {--views : Also publish mail-viewer views}';
 
     protected $description = 'Publish mail-viewer assets configs and optionally views.';
 
-    public function handle()
+    public function handle(): int
     {
         $this->call('vendor:publish', [
-            '--tag' => 'mail-viewer-assets',
+            '--tag'   => 'mail-viewer-assets',
             '--force' => true,
         ]);
 
@@ -30,9 +25,11 @@ class PublishCommand extends Command
 
         if ($this->option('views')) {
             $this->call('vendor:publish', [
-                '--tag' => 'mail-viewer-views',
+                '--tag'   => 'mail-viewer-views',
                 '--force' => true,
             ]);
         }
+
+        return static::SUCCESS;
     }
 }

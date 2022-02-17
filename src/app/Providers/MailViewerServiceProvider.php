@@ -2,10 +2,12 @@
 
 namespace MasterRO\MailViewer\Providers;
 
-use Illuminate\Mail\Events\MessageSending;
-use MasterRO\MailViewer\Listeners\MailLogger;
-use MasterRO\MailViewer\Commands\PublishCommand;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
+use Illuminate\Mail\Events\MessageSending;
+use MasterRO\MailViewer\Commands\PruneCommand;
+use MasterRO\MailViewer\Commands\PublishCommand;
+use MasterRO\MailViewer\Listeners\MailLogger;
+use MasterRO\MailViewer\Services\Logger;
 
 class MailViewerServiceProvider extends EventServiceProvider
 {
@@ -24,8 +26,11 @@ class MailViewerServiceProvider extends EventServiceProvider
     {
         parent::register();
 
+        $this->app->singleton(Logger::class);
+
         $this->commands([
             PublishCommand::class,
+            PruneCommand::class,
         ]);
     }
 
@@ -62,10 +67,10 @@ class MailViewerServiceProvider extends EventServiceProvider
 
         $this->publishes([
             __DIR__ . '/../../resources/views' => resource_path('views/vendor/mail-viewer'),
-        ], 'mail-viewer-views');
+        ], ['mail-viewer-views']);
 
         $this->publishes([
             __DIR__ . '/../../public/' => public_path('vendor/mail-viewer'),
-        ], 'mail-viewer-assets');
+        ], ['mail-viewer-assets', 'laravel-assets']);
     }
 }
