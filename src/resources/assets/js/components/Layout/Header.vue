@@ -2,8 +2,7 @@
   <header class="flex justify-between w-full bg-indigo-500 p-5 rounded-b-md">
     <div>
       <a
-        :href="appUrl"
-        title="Home page"
+        :href="siteUrl"
         class="flex text-white"
       >
         <span>
@@ -36,5 +35,5 @@
 import Stats from '../Stats/Stats';
 
 const appName = document.querySelector('#app').dataset.appName;
-const appUrl = document.querySelector('#app').dataset.appUrl;
+const siteUrl = document.querySelector('#app').dataset.siteUrl;
 </script>

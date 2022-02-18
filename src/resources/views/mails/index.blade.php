@@ -21,7 +21,7 @@
 <div
   id="app"
   data-app-name="{{ config('app.name', 'Laravel') }}"
-  data-app-url="{{ value(config('mail-viewer.site_url', url('/'))) }}"
+  data-site-url="{{ value(config('mail-viewer.site_url', url('/'))) }}"
 ></div>
 <script src="{{ asset('vendor/mail-viewer/js/app.js') }}"></script>
 </body>
