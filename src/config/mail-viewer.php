@@ -8,4 +8,5 @@ return [
     'time_format'           => 'H:i:s',
     'emails_per_page'       => 20,
     'prune_older_than_days' => 31,
+    'site_url'              => null,
 ];
