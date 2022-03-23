@@ -14,6 +14,12 @@
     </a>
 </p>
 
+<p align="center">
+    <a href="https://github.com/vshymanskyy/StandWithUkraine/blob/main/docs/README.md">
+        <img src="https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/badges/StandWithUkraine.svg" alt="StandWithUkraine">
+    </a>
+</p>
+
 # Laravel mail logger and viewer
 
 ### Easily log, view and search in browser all outgoing emails.
