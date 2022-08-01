@@ -28,7 +28,7 @@ class Logger
             'payload'     => $message->getBody()->toString(),
             'headers'     => $this->headersParser->parse($message),
             'attachments' => $this->attachmentsParser->parse($message),
-            'date'        => now(config('mail-viewer.timezone', 'UTC'))->toDateTimeString(),
+            'date'        => now(config('mail-viewer.timezone', config('app.timezone', 'UTC')))->toDateTimeString(),
         ]);
     }
 }
