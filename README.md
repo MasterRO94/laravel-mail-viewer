@@ -20,7 +20,7 @@
     </a>
 </p>
 
-# Laravel mail logger and viewer
+# Mail logger and viewer for Laravel
 
 ### Easily log, view and search in browser all outgoing emails.
 
@@ -34,7 +34,7 @@ be shown in a modern mail clients (gmail, etc.).
 | Laravel     | Mail Viewer |
 |:------------|:------------|
 | 5.5.x - 8.* | 1.3.x       |
-| 9.x         | 2.x.x       |
+| 9.x - 10.x  | 2.x.x       |
 
 ## Upgrade from v1 to v2
 
