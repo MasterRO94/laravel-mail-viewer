@@ -33,6 +33,10 @@ class MailLog extends Model
 
     protected $appends = ['formattedDate', 'formattedTime'];
 
+    protected $attributes = [
+        'payload' => '',
+    ];
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
