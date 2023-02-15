@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Str;
@@ -15,8 +14,6 @@ return new class extends Migration {
     {
         $table = config('mail-viewer.table', 'mail_logs');
 
-        Artisan::call('mail-viewer:prune');
-
         DB::table($table)
             ->latest('date')
             ->each(function (stdClass $mail) use ($table) {
@@ -24,15 +21,8 @@ return new class extends Migration {
                     DB::table($table)
                         ->where('id', $mail->id)
                         ->update([
-                            'attachments' => collect(preg_split('/(\\n\\n|\\r\\n)/', $mail->attachments))
-                                ->filter()
-                                ->toArray(),
-                            'headers'     => collect(preg_split('/(\\n\\n|\\r\\n)/', $mail->headers))
-                                ->mapWithKeys(fn(string $header) => [
-                                    Str::before($header, ':') => Str::after($header, ':'),
-                                ])
-                                ->filter()
-                                ->toArray(),
+                            'headers'     => $this->transformHeaders($mail),
+                            'attachments' => $this->transformAttachments($mail),
                         ]);
                 } catch (Throwable $t) {
                     //
@@ -51,5 +41,26 @@ return new class extends Migration {
             $table->text('attachments')->change();
             $table->text('headers')->change();
         });
+    }
+
+    public function transformHeaders(stdClass $mail): array
+    {
+        return Str::isJson($mail->headers)
+            ? json_decode($mail->headers, true)
+            : collect(preg_split('/(\\n\\n?|\\r\\n)/', $mail->headers))
+                ->mapWithKeys(fn(string $header) => [
+                    Str::before($header, ':') => Str::after($header, ':'),
+                ])
+                ->filter()
+                ->toArray();
+    }
+
+    public function transformAttachments(stdClass $mail): array
+    {
+        return Str::isJson($mail->attachments)
+            ? json_decode($mail->attachments, true)
+            : collect(preg_split('/(\\n\\n?|\\r\\n)/', $mail->attachments))
+                ->filter()
+                ->toArray();
     }
 };
