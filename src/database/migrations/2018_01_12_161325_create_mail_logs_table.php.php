@@ -21,14 +21,15 @@ class CreateMailLogsTable extends Migration
 		Schema::create((string)config('mail-viewer.table', 'mail_logs'), function (Blueprint $table) {
 			$table->increments('id');
 
-			$table->json('from')->nullable();
-			$table->json('to')->nullable();
-			$table->json('cc')->nullable();
-			$table->json('bcc')->nullable();
+			$table->jsonb('from')->nullable();
+			$table->jsonb('to')->nullable();
+			$table->jsonb('cc')->nullable();
+			$table->jsonb('bcc')->nullable();
 			$table->string('subject');
 			$table->text('body');
-			$table->text('headers')->nullable();
-			$table->text('attachments')->nullable();
+			$table->jsonb('headers')->nullable();
+			$table->jsonb('attachments')->nullable();
+            $table->longText('payload')->nullable();
 
 			$table->timestamp('date');
 		});
