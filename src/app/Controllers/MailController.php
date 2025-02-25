@@ -13,9 +13,9 @@ use MasterRO\MailViewer\Services\Resource;
 
 class MailController extends Controller
 {
-    public function __construct(protected Resource $mails)
-    {
-    }
+    public function __construct(
+        protected Resource $mails,
+    ) {}
 
     public function index(): View
     {

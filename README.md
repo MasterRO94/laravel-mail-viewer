@@ -34,7 +34,8 @@ be shown in a modern mail clients (gmail, etc.).
 | Laravel     | Mail Viewer |
 |:------------|:------------|
 | 5.5.x - 8.* | 1.3.x       |
-| 9.x - 10.x  | 2.x.x       |
+| 9.x - 12.x  | 2.x.x       |
+| 12.x        | 3.x.x       |
 
 ## Upgrade from v1 to v2
 

@@ -28,7 +28,10 @@ class Resource
     public function fetch(Request $request): LengthAwarePaginator
     {
         return MailLog::latest('date')
-            ->when($request->input('search'), fn(Builder $query) => $query->search($request->input('search')))
+            ->when(
+                $request->input('search'),
+                fn(Builder $query) => $query->search($request->input('search'))
+            )
             ->when(
                 $request->input('dateFrom'),
                 fn(Builder $query) => $query->where('date', '>=', $request->date('dateFrom')),
