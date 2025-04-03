@@ -18,7 +18,7 @@
 >
 import Email from '@/models/Email';
 import { ref, watch } from 'vue';
-import { codeToHtml } from 'shiki';
+import { codeToHtml } from '@/shiki.bundle';
 
 const { email } = defineProps({
   email: {

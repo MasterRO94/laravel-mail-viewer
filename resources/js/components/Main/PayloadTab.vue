@@ -23,7 +23,7 @@
 >
 import Email from '@/models/Email';
 import { computed, ref, watch } from 'vue';
-import { codeToHtml } from 'shiki';
+import { codeToHtml } from '@/shiki.bundle';
 import store from '@/store';
 import { fetchEmailPayload } from '@/api';
 import Loader from '@/components/Common/Loader.vue';

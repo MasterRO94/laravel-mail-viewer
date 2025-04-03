@@ -1,12 +1,12 @@
 <template>
-  <div class="relative">
-    <EmailListSkeleton v-if="loading && !initialized" />
+  <EmailListSkeleton v-if="loading && !initialized" />
 
-    <Filter
-      v-else-if="initialized"
-      @filter="search"
-    />
+  <Filter
+    v-else-if="initialized"
+    @filter="search"
+  />
 
+  <div class="flex flex-1 flex-col gap-2 min-h-0 overflow-auto">
     <div class="relative">
       <Loader
         v-show="loading"
