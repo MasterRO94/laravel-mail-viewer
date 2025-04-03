@@ -32,12 +32,12 @@ class Resource
                 fn(Builder $query) => $query->search($request->input('search')),
             )
             ->when(
-                $request->input('dateFrom'),
-                fn(Builder $query) => $query->where('date', '>=', $request->date('dateFrom')),
+                $request->input('startDate'),
+                fn(Builder $query) => $query->where('date', '>=', $request->date('startDate')->startOfDay()),
             )
             ->when(
-                $request->input('dateTo'),
-                fn(Builder $query) => $query->where('date', '<=', $request->date('dateTo')),
+                $request->input('endDate'),
+                fn(Builder $query) => $query->where('date', '<=', $request->date('endDate')->endOfDay()),
             )
             ->paginate(
                 $request->input('per_page', config('mail-viewer.emails_per_page', 20)),

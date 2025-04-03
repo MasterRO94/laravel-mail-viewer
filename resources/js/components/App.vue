@@ -3,6 +3,8 @@
     <Sidebar @selected="(email: Email) => (activeEmail = email)" />
 
     <MainSection :email="activeEmail" />
+
+    <ThemeToggler />
   </div>
 </template>
 
@@ -14,6 +16,7 @@ import { onBeforeMount, ref } from 'vue';
 import Sidebar from '@/components/Sidebar/Sidebar.vue';
 import MainSection from '@/components/Main/MainSection.vue';
 import Email from '@/models/Email';
+import ThemeToggler from '@/components/Common/ThemeToggler.vue';
 
 const activeEmail = ref<Email | null>(null);
 

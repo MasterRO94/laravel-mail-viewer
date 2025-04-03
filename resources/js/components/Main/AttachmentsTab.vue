@@ -15,16 +15,7 @@
           <div v-text="attachment.name" />
         </div>
 
-        <div class="flex gap-2">
-          <Btn
-            v-if="isImage(attachment)"
-            class="px-1.5 py-0.5 text-sm"
-          >
-            <IconEye class="size-5" />
-
-            View
-          </Btn>
-
+        <div>
           <Btn
             class="px-1.5 py-0.5 text-sm"
             :href="`${baseUrl}/emails/${email.id}/attachments/${attachment.name}`"
@@ -48,7 +39,6 @@ import Attachment from '@/models/Attachment';
 import {
   Icon,
   IconDownload,
-  IconEye,
   IconFile,
   IconFileTypeDoc,
   IconFileTypeDocx,
@@ -63,7 +53,7 @@ import {
   IconPhoto,
 } from '@tabler/icons-vue';
 import Btn from '@/components/Common/Btn.vue';
-import { baseUrl } from '@/api'
+import { baseUrl } from '@/api';
 
 const { email } = defineProps({
   email: {
@@ -77,10 +67,6 @@ const { email } = defineProps({
     default: false,
   },
 });
-
-const isImage = (attachment: Attachment): boolean => {
-  return ['jpeg', 'png', 'gif', 'bmp'].includes(attachment.subtype);
-};
 
 const iconMap: Record<string, Icon> = {
   bmp: IconPhoto,

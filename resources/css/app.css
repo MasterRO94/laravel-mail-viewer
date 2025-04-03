@@ -2,6 +2,7 @@
 
 @source './src/resources/views';
 @source './src/resources/assets/js';
+@source '../../node_modules/flowbite-datepicker';
 
 @plugin '@tailwindcss/forms';
 
@@ -13,6 +14,9 @@
 
   --animate-fade-in: fadeIn .15s ease-in-out forwards;
   --animate-fade-in-scale: fadeInScale .1s ease-out forwards;
+
+  --color-primary-500: var(--color-teal-500);
+  --color-primary-600: var(--color-teal-600);
 
   @keyframes fadeIn {
     0% {
@@ -58,7 +62,6 @@
 }
 
 @layer components {
-
   .ease-out-enter-active,
   .ease-out-leave-active {
     @apply opacity-90 translate-y-0 duration-200;
@@ -87,6 +90,10 @@
   .fade-switch-enter-from,
   .fade-switch-leave-to {
     @apply ease-out opacity-0 duration-50;
+  }
+
+  .datepicker-cell.selected {
+    @apply bg-teal-500 dark:bg-teal-600;
   }
 }
 

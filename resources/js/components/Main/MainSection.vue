@@ -21,6 +21,11 @@
       Emails preview and their details will appear here.
     </div>
 
+    <MainSectionSkeleton
+      v-if="!email && !initialized"
+      class="flex flex-col justify-center mt-8"
+    />
+
     <section
       v-if="email"
       class="mt-5 p-2 bg-slate-100 dark:bg-slate-800 rounded-sm"
@@ -110,6 +115,7 @@ import TextTab from './TextTab.vue';
 import AttachmentsTab from '@/components/Main/AttachmentsTab.vue';
 import EmailDetailsSkeleton from '@/components/Skeletons/EmailDetailsSkeleton.vue';
 import store from '@/store';
+import MainSectionSkeleton from '@/components/Skeletons/MainSectionSkeleton.vue';
 
 const { email } = defineProps({
   email: {
