@@ -7,7 +7,7 @@
       hover:border-l-teal-500/50
     "
     :class="{
-      'border-l-teal-500 bg-slate-200/80 dark:bg-slate-600/40 hover:border-l-teal-500': active,
+      'border-l-teal-500 dark:border-l-teal-500 bg-slate-200/80 dark:bg-slate-600/40 hover:border-l-teal-500': active,
     }"
     @click="$emit('selected')"
   >
