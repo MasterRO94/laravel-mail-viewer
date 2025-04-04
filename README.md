@@ -20,113 +20,114 @@
     </a>
 </p>
 
-# Mail logger and viewer for Laravel
+# Laravel Mail Logger & Viewer
 
-### Easily log, view and search in browser all outgoing emails.
+Easily log, view, and search outgoing emails directly in your browser.
 
-![preview](https://github.com/MasterRO94/packages/blob/master/mail-viewer/Mail%20Viewer%20V2.png "Preview")
+![Preview Dark](./art/v3-dark.png "Preview Dark")
+![Preview Light](./art/v3-light.png "Preview Light")
 
-This package gives an ability to log all outgoing emails to a database and view them all from a browser like they will
-be shown in a modern mail clients (gmail, etc.).
+This package logs all outgoing emails to a database and provides a web interface to view them, formatted as they appear in modern email clients like Gmail.
 
-## Version Compatibility
-
-| Laravel     | Mail Viewer |
-|:------------|:------------|
-| 5.5.x - 8.* | 1.3.x       |
-| 9.x - 12.x  | 2.x.x       |
-| 12.x        | 3.x.x       |
-
-## Upgrade from v1 to v2
-
-Version 2 has been almost totally rewritten and brings totally new fresh UI build with Vue.js 3 and TailwindCss 3.  
-It works **only with Laravel 9+** as of Symfony Mailer replacement for previously used Swift Mailer.
-
-### Upgrade Steps
-
-#### Composer Dependencies
-
-You should update the dependency in your application's composer.json file:
-
-`masterro/laravel-mail-viewer` to ^2.0
-
-#### Database migrations
-
-Run package migrations (requires `doctrine/dbal` to be installed):
-
-```shell
-php artisan migrate
-```
-
-#### Publish assets
-
-Run publish command:
-
-```shell
-php artisan mail-viewer:publish --views
-```
-
-#### Update configs
-
-V2 uses separate date format for date and time, update these in your `config/mail-viewer.php` file
-
-```php
-'date_format' => 'd.m.Y',
-'time_format' => 'H:i:s',
-```
-
-#### Data pruning
-
-V2 allows prune old records easily using `mail-viewer:prune` command. You can add it to your Scheduler.
-
-```php
-// Console/Kernel.php
-$schedule->command('mail-viewer:prune')->daily();
-```
-
-You can specify how many days data will be stored before pruning using config. Default value is 31 days.
-
-```php
-'prune_older_than_days' => 31,
-```
+---
 
 ## Installation
 
-### Step 1: Composer
+### Step 1: Install via Composer
 
-From the command line, run:
+Run the following command in your terminal:
 
-```
+```sh
 composer require masterro/laravel-mail-viewer
 ```
 
-### Step 2: Publish assets and configs
+### Step 2: Publish Assets & Configurations
 
-```
+```sh
 php artisan mail-viewer:publish
 ```
 
-You have to publish _**assets,**_ and _**views,**_ _configs_ are optional.
+### Step 3: Run Migrations
 
-### Step 3: Run migrations
-
-```
+```sh
 php artisan migrate
 ```
 
-### Step 4: View emails
+### Step 4: View Emails
 
-All ongoing emails you can find on `/_mail-viewer` page.
+Visit `/_mail-viewer` in your browser to access the email viewer.
+
+> **Note:** The route can be customized in the configuration file.
+
+---
 
 ## Configuration
 
-You can review and change all the default configuration values in published `config/mail-viewer.php` file.
+You can adjust default settings in the `config/mail-viewer.php` file.
 
-#### Data pruning (v2+)
+### Data Pruning
 
-The package allows you to prune old records easily using `mail-viewer:prune` command. You can add it to your Scheduler.
+The package supports Laravel's [Model Pruning](https://laravel.com/docs/eloquent#pruning-models). Define how many days emails should be retained in the configuration:
 
 ```php
-// Console/Kernel.php
-$schedule->command('mail-viewer:prune')->daily();
+'prune_older_than_days' => 365,
 ```
+
+---
+
+## Production Usage
+
+By default, the email viewer is publicly accessible. 
+In a production environment, it's highly recommended to restrict access 
+using middleware or something like [Access Screen](https://github.com/MasterRO94/laravel-access-screen) package.
+
+### Restrict Access with Middleware
+
+Modify your `routes/web.php` to apply authentication:
+
+```php
+'middleware' => ['web', 'can:viewMailLogs'],
+```
+
+You can also limit access by IP address in `App\Http\Middleware\RestrictMailViewerAccess.php`:
+
+```php
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+
+class RestrictMailViewerAccess
+{
+    public function handle(Request $request, Closure $next)
+    {
+        if (!in_array($request->ip(), ['127.0.0.1', '::1', 'YOUR_ALLOWED_IP'])) {
+            abort(403);
+        }
+
+        return $next($request);
+    }
+}
+```
+
+Apply it in config:
+
+```php
+
+'middleware' => ['web', RestrictMailViewerAccess::class],
+```
+
+Now, only authorized users or allowed IPs can access the mail viewer.
+
+---
+
+## License
+
+This package is open-source software licensed under the [MIT license](LICENSE).
+
+---
+
+## Credits
+
+Developed by [MasterRO](https://github.com/MasterRO94).
+
