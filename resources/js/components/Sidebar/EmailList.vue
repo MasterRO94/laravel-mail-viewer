@@ -162,6 +162,12 @@ const select = (email: Email) => {
 };
 
 const handleAutoUpdate = () => {
+  if (!autoUpdateEnabled.value) {
+    clearInterval(autoUpdateInterval);
+
+    return;
+  }
+
   autoUpdateInterval = setInterval(async () => {
     if (!initialized.value) {
       return;
