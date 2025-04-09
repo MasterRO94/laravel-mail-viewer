@@ -8,6 +8,7 @@
     "
     :class="{
       'border-l-teal-500 dark:border-l-teal-500 bg-slate-200/80 dark:bg-slate-600/40 hover:border-l-teal-500': active,
+      'font-bold': email.isNew
     }"
     @click="$emit('selected')"
   >

@@ -38,9 +38,9 @@ class MailController extends Controller
 
     public function emails(Request $request): JsonResponse
     {
-        return response()->json([
-            'data' => $this->mails->fetch($request),
-        ]);
+        return response()->json(
+            $this->mails->fetch($request),
+        );
     }
 
     public function stats(): JsonResponse

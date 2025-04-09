@@ -24,8 +24,8 @@
 
 Easily log, view, and search outgoing emails directly in your browser.
 
-![Preview Dark](./art/v3-dark.png "Preview Dark")
 ![Preview Light](./art/v3-light.png "Preview Light")
+![Preview Dark](./art/v3-dark.png "Preview Dark")
 
 This package logs all outgoing emails to a database and provides a web interface to view them, formatted as they appear in modern email clients like Gmail.
 

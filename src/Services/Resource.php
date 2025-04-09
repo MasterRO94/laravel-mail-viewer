@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace MasterRO\MailViewer\Services;
 
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -24,9 +23,14 @@ class Resource
         'attachments',
     ];
 
-    public function fetch(Request $request): LengthAwarePaginator
+    public function fetch(Request $request): array
     {
-        return MailLog::latest('date')
+        $perPage = $request->input(
+            'per_page',
+            config('mail-viewer.emails_per_page', 20),
+        );
+
+        $baseQuery = MailLog::latest('id')
             ->when(
                 $request->input('search'),
                 fn(Builder $query) => $query->search($request->input('search')),
@@ -39,12 +43,26 @@ class Resource
                 $request->input('endDate'),
                 fn(Builder $query) => $query->where('date', '<=', $request->date('endDate')->endOfDay()),
             )
-            ->paginate(
-                $request->input('per_page', config('mail-viewer.emails_per_page', 20)),
-                $request->has('slim')
-                    ? array_filter($this->fields, static fn(string $field) => !in_array($field, ['body']))
-                    : $this->fields,
+            ->when(
+                $request->input('oldestId'),
+                fn(Builder $query) => $query->where('id', '<', $request->integer('oldestId')),
+            )
+            ->when(
+                $request->input('latestId'),
+                fn(Builder $query) => $query->where('id', '>', $request->integer('latestId')),
             );
+
+        $items = $baseQuery->clone()
+            ->take($perPage)
+            ->get($this->fields);
+
+        $hasMoreItems = $baseQuery->clone()->take($perPage + 1)->count() > $perPage;
+
+        return [
+            'data' => $items,
+            'perPage' => $perPage,
+            'hasMoreItems' => $hasMoreItems,
+        ];
     }
 
     public function stats(): array
@@ -55,7 +73,8 @@ class Resource
                 'value' => MailLog::whereBetween('date', $range)->count(),
                 'title' => "Sent {$key}",
             ])
-            ->pipe(static fn(Collection $data) => ['data' => $data->values()->toArray()]);
+            ->values()
+            ->toArray();
     }
 
     protected function statRanges(): Collection

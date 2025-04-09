@@ -1,13 +1,13 @@
 import { request } from './api';
-import { ModelCollectionWithPagination } from '@/types';
+import { EmailRequestParams, ModelCollectionWithPagination } from '@/types';
 import Email from '@/models/Email';
 
-export async function fetchEmails(params = {}): Promise<ModelCollectionWithPagination<Email>> {
-  const { data } = await request('/emails', params);
+export async function fetchEmails(params: EmailRequestParams = {}): Promise<ModelCollectionWithPagination<Email>> {
+  const response = await request('/emails', params);
 
-  data.data = data.data.map((attributes: any) => Email.create(attributes));
+  response.data = response.data.map((attributes: any) => Email.create(attributes));
 
-  return data;
+  return response;
 }
 
 export async function fetchEmailPayload(email: any): Promise<string> {

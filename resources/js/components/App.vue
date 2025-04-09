@@ -1,8 +1,8 @@
 <template>
   <div class="font-primary flex min-h-dvh w-full">
-    <Sidebar @selected="(email: Email) => (activeEmail = email)" />
+    <Sidebar />
 
-    <MainSection :email="activeEmail" />
+    <MainSection />
 
     <ThemeToggler />
   </div>
@@ -12,13 +12,10 @@
   setup
   lang="ts"
 >
-import { onBeforeMount, ref } from 'vue';
+import { onBeforeMount } from 'vue';
 import Sidebar from '@/components/Sidebar/Sidebar.vue';
 import MainSection from '@/components/Main/MainSection.vue';
-import Email from '@/models/Email';
 import ThemeToggler from '@/components/Common/ThemeToggler.vue';
-
-const activeEmail = ref<Email | null>(null);
 
 const theme: string = localStorage.getItem('color-theme') || 'dark';
 

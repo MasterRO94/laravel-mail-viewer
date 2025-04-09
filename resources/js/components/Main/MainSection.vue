@@ -103,7 +103,6 @@
   setup
   lang="ts"
 >
-import Email from '@/models/Email';
 import Stats from '@/components/Common/Stats.vue';
 import EmailDetails from '@/components/Main/EmailDetails.vue';
 import { computed, ref, watch } from 'vue';
@@ -117,12 +116,7 @@ import EmailDetailsSkeleton from '@/components/Skeletons/EmailDetailsSkeleton.vu
 import store from '@/store';
 import MainSectionSkeleton from '@/components/Skeletons/MainSectionSkeleton.vue';
 
-const { email } = defineProps({
-  email: {
-    type: [Email, null],
-    required: true,
-  },
-});
+const email = computed(() => store.activeEmail);
 
 const tabs = {
   preview: 'Preview',
@@ -139,9 +133,9 @@ const activeTab = ref<TabName>('preview');
 const initialized = computed(() => store.initialized);
 
 const selectTab = (tab: TabName) => {
-  if (tab === 'payload' && email?.attachments.length) {
+  if (tab === 'payload' && email.value?.attachments.length) {
     window.open(
-      `${window.location.origin}${window.location.pathname}/emails/${String(email.id)}/raw-payload`,
+      `${window.location.origin}${window.location.pathname}/emails/${String(email.value.id)}/raw-payload`,
       '_blank',
     );
 
@@ -153,11 +147,11 @@ const selectTab = (tab: TabName) => {
 
 const shouldDisplayTab = (tab: TabName): boolean => {
   if (tab === 'text') {
-    return Boolean(email?.text);
+    return Boolean(email.value?.text);
   }
 
   if (tab === 'attachments') {
-    return email?.attachments.length as number > 0;
+    return email.value?.attachments.length as number > 0;
   }
 
   return true;

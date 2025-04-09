@@ -3,9 +3,9 @@ import { ModelCollection } from '@/types';
 import Metric from '@/models/Metric';
 
 export async function fetchStats(params = {}): Promise<ModelCollection<Metric>> {
-  const { data } = await request('/stats', params);
+  const response = await request('/stats', params);
 
-  data.data = data.data.map((attributes: any) => Metric.create(attributes));
+  response.data = response.data.map((attributes: any) => Metric.create(attributes));
 
-  return data;
+  return response;
 }

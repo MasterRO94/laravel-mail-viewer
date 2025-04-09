@@ -17,6 +17,7 @@ export default class Email extends Model {
   public date!: string;
   public formattedDate!: string;
   public formattedTime!: string;
+  public isNew: boolean = false;
 
   setAttributes(attributes: Partial<Email>) {
     this.id = attributes.id ?? this.id;
@@ -32,5 +33,13 @@ export default class Email extends Model {
     this.date = attributes.date ?? this.date;
     this.formattedDate = attributes.formattedDate ?? this.formattedDate;
     this.formattedTime = attributes.formattedTime ?? this.formattedTime;
+  }
+
+  markAsNew() {
+    this.isNew = true;
+
+    setTimeout(() => this.isNew = false, 3000);
+
+    return this;
   }
 }

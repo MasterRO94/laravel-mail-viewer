@@ -1,11 +1,7 @@
 
 export interface Pagination {
-  current_page: number;
-  last_page: number;
-  per_page: number;
-  total: number;
-  from: number;
-  to: number;
+  hasMoreItems: boolean;
+  perPage: number;
 }
 
 export type ModelCollection<T> = {
@@ -20,3 +16,11 @@ export interface Recipient {
 }
 
 export type RecipientEmailField = 'from' | 'to' | 'cc' | 'bcc';
+
+export interface EmailRequestParams {
+  search?: string;
+  startDate?: string;
+  endDate?: string;
+  oldestId?: number;
+  latestId?: number;
+}

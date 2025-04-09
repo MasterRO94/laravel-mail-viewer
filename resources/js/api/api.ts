@@ -20,6 +20,10 @@ export async function request(url: string, params = {}) {
   try {
     response = await fetch(url, {
       signal: abortController.signal,
+      headers: {
+        'Accept': 'application/json',
+        'X-Requested-With': 'fetch',
+      },
     });
   } catch (err: any) {
     if (err.name !== 'AbortError') {

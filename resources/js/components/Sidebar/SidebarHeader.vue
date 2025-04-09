@@ -24,7 +24,6 @@
   setup
   lang="ts"
 >
-
 import IconMail from '@/components/Icons/IconMail.vue';
 const appName = document.querySelector('#app').dataset.appName;
 const siteUrl = document.querySelector('#app').dataset.siteUrl;
