@@ -6,9 +6,9 @@
         v-model="autoUpdateEnabled"
         type="checkbox"
         class="
-        text-teal-600 bg-gray-100 border-gray-300 rounded-sm
-        focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2
-        dark:bg-gray-700 dark:border-gray-600
+          text-teal-500 border-gray-300 rounded-sm
+          focus:ring-teal-500 dark:focus:ring-teal-600 dark:ring-offset-gray-800 focus:ring-2
+          dark:bg-gray-700 dark:border-gray-600
         "
       >
 
