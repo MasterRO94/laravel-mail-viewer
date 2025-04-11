@@ -38,7 +38,7 @@ export default class Email extends Model {
   markAsNew() {
     this.isNew = true;
 
-    setTimeout(() => this.isNew = false, 3000);
+    setTimeout(() => this.isNew = false, 100);
 
     return this;
   }
