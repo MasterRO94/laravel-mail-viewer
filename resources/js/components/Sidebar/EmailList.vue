@@ -62,10 +62,10 @@
   setup
   lang="ts"
 >
-import { computed, onBeforeMount, onMounted, reactive, ref, watch } from 'vue';
+import {computed, onBeforeMount, onMounted, reactive, ref, watch} from 'vue';
 import store from '@/store';
-import { fetchEmails } from '@/api';
-import { EmailRequestParams, ModelCollectionWithPagination } from '@/types';
+import {fetchEmails} from '@/api';
+import {EmailRequestParams, ModelCollectionWithPagination} from '@/types';
 import Email from '@/models/Email';
 import EmailListItem from './EmailListItem.vue';
 import EmailListSkeleton from '@/components/Skeletons/EmailListSkeleton.vue';
@@ -115,16 +115,14 @@ const loadEmails = async (fetchNew: boolean = false, merge: boolean = true) => {
     loading.value = true;
   }
 
-  const params: EmailRequestParams = { ...filter };
+  const params: EmailRequestParams = {...filter};
 
   if (fetchNew) {
-    if (!emails.value?.data[0].id) {
-      return;
+    if (emails.value?.data[0]?.id) {
+      params.latestId = emails.value.data[0].id;
     }
-
-    params.latestId = emails.value.data[0].id;
   } else {
-    const oldestId = emails.value?.data[emails.value.data.length - 1].id;
+    const oldestId = emails.value?.data[emails.value.data.length - 1]?.id;
 
     if (oldestId) {
       params.oldestId = oldestId;
