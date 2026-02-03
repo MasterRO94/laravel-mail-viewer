@@ -15,14 +15,14 @@ class BaseTestCase extends TestCase
 {
     use RefreshDatabase;
 
-    protected function getPackageProviders($app)
+    protected function getPackageProviders($app): array
     {
         return [
             MailViewerServiceProvider::class,
         ];
     }
 
-    protected function getEnvironmentSetUp($app)
+    protected function getEnvironmentSetUp($app): void
     {
         $app['config']->set('app.key', 'base64:w1vzmDPOvle3Ky0aBWkjxiNAdXdTAiE8vAc7+9VYrVk=');
         $app['config']->set('mail.driver', 'array');
@@ -44,18 +44,21 @@ class BaseTestCase extends TestCase
                     'email' => 'igoshin18@gmail.com',
                     'name'  => 'Roman Ihoshyn',
                 ],
+                'johndoe@email.com',
             ])
                 ->cc([
                     [
                         'email' => 'cc@email.com',
                         'name'  => 'Email CC',
                     ],
+                    'johndoecc@email.com',
                 ])
                 ->bcc([
                     [
                         'email' => 'bcc@email.com',
                         'name'  => 'Email BCC',
                     ],
+                    'johndoebcc@email.com',
                 ])
                 ->send(new TestMail());
         }

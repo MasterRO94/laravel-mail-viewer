@@ -15,21 +15,23 @@
         "log"
     ],
     "require": {
-        "illuminate/support": "^9.0|^10.0|^11.0|^12.0",
-        "illuminate/events": "^9.0|^10.0|^11.0|^12.0",
-        "illuminate/database": "^9.0|^10.0|^11.0|^12.0",
-        "illuminate/routing": "^9.0|^10.0|^11.0|^12.0",
-        "illuminate/view": "^9.0|^10.0|^11.0|^12.0",
-        "illuminate/mail": "^9.0|^10.0|^11.0|^12.0",
         "doctrine/dbal": "^3.5 | ^4.0 | ^5.0",
-        "nesbot/carbon": ">=2.62.1"
+        "illuminate/database": "^10.0|^11.0|^12.0",
+        "illuminate/events": "^10.0|^11.0|^12.0",
+        "illuminate/mail": "^10.0|^11.0|^12.0",
+        "illuminate/routing": "^10.0|^11.0|^12.0",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "illuminate/view": "^10.0|^11.0|^12.0",
+        "nesbot/carbon": ">=2.62.1",
+        "opcodesio/mail-parser": "^0.2.1"
     },
     "require-dev": {
-        "orchestra/testbench": "^7.0|^8.0|^9.0|^10.0"
+        "orchestra/testbench": "^7.0|^8.0|^9.0|^10.0",
+        "pestphp/pest": "^3.8"
     },
     "autoload": {
         "psr-4": {
-            "MasterRO\\MailViewer\\": "src/app",
+            "MasterRO\\MailViewer\\": "src/",
             "MasterRO\\MailViewer\\Tests\\": "tests/"
         }
     },
@@ -37,7 +39,13 @@
     "prefer-stable": true,
     "config": {
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "scripts": {
+        "test": "./vendor/bin/pest"
     },
     "extra": {
         "laravel": {

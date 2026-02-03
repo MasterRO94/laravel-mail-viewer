@@ -1,0 +1,122 @@
+@import 'tailwindcss';
+
+@source './src/resources/views';
+@source './src/resources/assets/js';
+@source '../../node_modules/flowbite-datepicker';
+
+@plugin '@tailwindcss/forms';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-primary: Nunito\Sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+  'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  --animate-fade-in: fadeIn .15s ease-in-out forwards;
+  --animate-fade-in-scale: fadeInScale .1s ease-out forwards;
+
+  --color-primary-500: var(--color-teal-500);
+  --color-primary-600: var(--color-teal-600);
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+@utility container {
+  margin-inline: auto;
+}
+
+/*
+  The default border color has changed to `currentColor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentColor);
+  }
+}
+
+@layer components {
+  .ease-out-enter-active,
+  .ease-out-leave-active {
+    @apply opacity-90 translate-y-0 duration-200;
+  }
+
+  .ease-out-enter-from,
+  .ease-out-leave-to {
+    @apply ease-in opacity-0 -translate-y-4 duration-200;
+  }
+
+  .fade-enter-active,
+  .fade-leave-active {
+    @apply ease-in opacity-100 duration-150;
+  }
+
+  .fade-enter-from,
+  .fade-leave-to {
+    @apply ease-out opacity-0 duration-150;
+  }
+
+  .fade-switch-enter-active,
+  .fade-switch-leave-active {
+    @apply ease-in opacity-100 duration-50;
+  }
+
+  .fade-switch-enter-from,
+  .fade-switch-leave-to {
+    @apply ease-out opacity-0 duration-50;
+  }
+
+  .datepicker-cell.selected {
+    @apply bg-teal-500 dark:bg-teal-600;
+  }
+}
+
+pre {
+  width: 100%;
+  max-width: 100%;
+  padding: 1rem;
+  overflow-x: auto;
+  white-space: pre;
+  box-sizing: border-box;
+}
+
+pre code {
+  display: block;
+  min-width: 100%;
+  background: inherit;
+}
+
+.dark .shiki,
+.dark .shiki span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+  font-weight: var(--shiki-dark-font-weight) !important;
+  text-decoration: var(--shiki-dark-text-decoration) !important;
+}
