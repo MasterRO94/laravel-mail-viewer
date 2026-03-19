@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import * as path from 'node:path';
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
-import eslint from 'vite-plugin-eslint2';
+// import eslint from 'vite-plugin-eslint2';
 import vueDevTools from 'vite-plugin-vue-devtools';
 
 const config = defineConfig({
@@ -34,10 +34,11 @@ const config = defineConfig({
   plugins: [
     tailwindcss(),
 
-    eslint({
-      lintOnStart: true,
-      include: ['resources/js/**/*.{js,ts,vue}', 'resources/css/**/*.css'],
-    }),
+    // @todo: Uncomment when Vite 8 is supported
+    // eslint({
+    //   lintOnStart: true,
+    //   include: ['resources/js/**/*.{js,ts,vue}', 'resources/css/**/*.css'],
+    // }),
 
     vue({
       template: {
