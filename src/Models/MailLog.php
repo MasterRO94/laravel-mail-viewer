@@ -56,9 +56,11 @@ class MailLog extends Model
 
     public function scopeSearch(Builder $query, string $term): Builder
     {
+        $escaped = addcslashes($term, '%_\\');
+
         return $query
-            ->where('subject', 'like', "%$term%")
-            ->orWhere('headers', 'like', "%$term%");
+            ->where('subject', 'like', "%{$escaped}%")
+            ->orWhere('headers', 'like', "%{$escaped}%");
     }
 
     public function getFormattedDateAttribute(): string

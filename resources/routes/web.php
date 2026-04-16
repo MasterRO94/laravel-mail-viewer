@@ -26,7 +26,7 @@ Route::group([
         ->name('rawPayload');
 
     Route::get('/emails/{mailLog}/attachments', [MailController::class, 'attachments'])
-        ->name('payload');
+        ->name('attachments');
 
     Route::get('/emails/{mailLog}/attachments/{fileName}', [MailController::class, 'downloadAttachment'])
         ->name('downloadAttachment');
