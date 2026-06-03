@@ -39,7 +39,6 @@ const Visibility: Directive<HTMLElementWithObserver, VisibilityCallback> = {
       return;
     }
 
-     
     const once = binding.modifiers.once ?? false;
     const event = (['visible', 'hidden', 'changed'] as VisibilityEvent[]).find(
       (e) => binding.modifiers[e]
