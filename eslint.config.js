@@ -6,20 +6,18 @@ import prettier from 'eslint-config-prettier';
 import vue from 'eslint-plugin-vue';
 
 export default defineConfigWithVueTs(
-  {
-    languageOptions: {
-      parser: 'vue-eslint-parser',
-      parserOptions: {
-        parser: '@typescript-eslint/parser', // Ensure TS parser is used for Vue
-        project: './tsconfig.json', // Path to TypeScript config
-        tsconfigRootDir: import.meta.dirname, // Ensure correct path resolution
-      },
-    },
-  },
   vue.configs['flat/recommended'],
+  // strictTypeChecked enables `projectService` for typed linting, so no manual
+  // `parserOptions.project` is needed (the two are mutually exclusive).
   vueTsConfigs.strictTypeChecked,
   {
-    ignores: ['vendor', 'node_modules', 'public', 'resources/old-assets'],
+    ignores: [
+      'vendor',
+      'node_modules',
+      'public',
+      'resources/old-assets',
+      '.claude',
+    ],
   },
   {
     rules: {

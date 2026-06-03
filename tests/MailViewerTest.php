@@ -91,6 +91,34 @@ test('it receives mail log attachments', function () {
         ]);
 });
 
+test('it scopes search results by date range', function () {
+    $this->travelTo('2022-01-01');
+    $this->sendTestEmails(2);
+
+    $this->travelTo('2022-06-15');
+    $this->sendTestEmails(3);
+
+    // "Test mail" matches every row, so the date range must narrow the result:
+    // the search OR must stay grouped against the date filters.
+    $this
+        ->get(route('mail-viewer::emails', [
+            'search'    => 'Test mail',
+            'startDate' => '2022-06-01',
+            'endDate'   => '2022-06-30',
+        ]))
+        ->assertOk()
+        ->assertJsonCount(3, 'data');
+});
+
+test('it searches case-insensitively', function () {
+    $this->sendTestEmails(2);
+
+    $this
+        ->get(route('mail-viewer::emails', ['search' => 'TEST MAIL']))
+        ->assertOk()
+        ->assertJsonCount(2, 'data');
+});
+
 test('it receives mail log payload', function () {
     $this->sendTestEmails(1);
 

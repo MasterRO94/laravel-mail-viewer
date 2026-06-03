@@ -57,10 +57,20 @@ class MailLog extends Model
     public function scopeSearch(Builder $query, string $term): Builder
     {
         $escaped = addcslashes($term, '%_\\');
+        $like = "%{$escaped}%";
+
+        // PostgreSQL LIKE is case-sensitive and rejects jsonb operands, so use
+        // ILIKE and cast the jsonb `headers` column to text. MySQL and SQLite
+        // LIKE is already case-insensitive under their default collations.
+        if ($query->getConnection()->getDriverName() === 'pgsql') {
+            return $query
+                ->where('subject', 'ilike', $like)
+                ->orWhereRaw('headers::text ilike ?', [$like]);
+        }
 
         return $query
-            ->where('subject', 'like', "%{$escaped}%")
-            ->orWhere('headers', 'like', "%{$escaped}%");
+            ->where('subject', 'like', $like)
+            ->orWhere('headers', 'like', $like);
     }
 
     public function getFormattedDateAttribute(): string

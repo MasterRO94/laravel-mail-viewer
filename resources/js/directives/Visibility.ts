@@ -39,7 +39,7 @@ const Visibility: Directive<HTMLElementWithObserver, VisibilityCallback> = {
       return;
     }
 
-    // eslint-disable-next-line
+     
     const once = binding.modifiers.once ?? false;
     const event = (['visible', 'hidden', 'changed'] as VisibilityEvent[]).find(
       (e) => binding.modifiers[e]

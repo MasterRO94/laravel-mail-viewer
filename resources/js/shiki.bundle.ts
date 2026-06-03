@@ -4,7 +4,7 @@ import type {
   DynamicImportThemeRegistration,
   HighlighterGeneric,
 } from '@shikijs/types';
-import { createdBundledHighlighter, createSingletonShorthands, } from '@shikijs/core';
+import { createBundledHighlighter, createSingletonShorthands, } from '@shikijs/core';
 import { createJavaScriptRegexEngine } from '@shikijs/engine-javascript';
 
 type BundledLanguage = 'html' | 'css'
@@ -23,7 +23,7 @@ const bundledThemes = {
     import('@shikijs/themes/material-theme-lighter'),
 } as Record<BundledTheme, DynamicImportThemeRegistration>;
 
-const createHighlighter = /* @__PURE__ */ createdBundledHighlighter<
+const createHighlighter = /* @__PURE__ */ createBundledHighlighter<
   BundledLanguage,
   BundledTheme
 >({
