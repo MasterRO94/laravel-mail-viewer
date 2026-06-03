@@ -46,7 +46,7 @@
 import Email from '@/models/Email';
 import { RecipientEmailField } from '@/types';
 
-const { email, field, displayFieldName = false, linkAddress = false } = defineProps<{
+const { email, field, displayFieldName, linkAddress } = defineProps<{
   email: Email,
   field: RecipientEmailField,
   displayFieldName?: boolean,

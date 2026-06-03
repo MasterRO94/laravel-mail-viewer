@@ -28,7 +28,7 @@ const theme = ref<string>(localStorage.getItem('color-theme') || 'dark');
 const toggleTheme = () => {
   theme.value = theme.value === 'dark' ? 'light' : 'dark';
 
-  localStorage.setItem('color-theme', String(theme.value));
+  localStorage.setItem('color-theme', theme.value);
 
   document.body.classList.toggle('dark');
 };

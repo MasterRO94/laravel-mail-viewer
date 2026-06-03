@@ -22,13 +22,13 @@
   lang="ts"
 >
 import Email from '@/models/Email';
-import { computed, ref, watch } from 'vue';
-import { codeToHtml } from '@/shiki.bundle';
+import {computed, ref, watch} from 'vue';
+import {codeToHtml} from '@/shiki.bundle';
 import store from '@/store';
-import { fetchEmailPayload } from '@/api';
+import {fetchEmailPayload} from '@/api';
 import Loader from '@/components/Common/Loader.vue';
 
-const { email, active } = defineProps({
+const {email, active} = defineProps({
   email: {
     type: Email,
     required: true,
@@ -53,10 +53,10 @@ const payload = computed({
 
     if (Object.keys(store.payloads).length > 10) {
       // Cleanup cache.
-      const keys = Object.keys(store.payloads).filter(key => String(key) !== String(email.id));
-      const keyIndex = Math.floor(Math.random() * keys.length);
+      const keys = Object.keys(store.payloads).filter(key => key !== String(email.id));
+      const keyIndex: number = Math.floor(Math.random() * keys.length);
 
-      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
+      // eslint-disable-next-line
       delete store.payloads[keys[keyIndex]];
     }
   },
@@ -88,5 +88,5 @@ watch(() => active, (value: boolean) => {
   }
 
   return loadPayload();
-}, { immediate: true });
+}, {immediate: true});
 </script>

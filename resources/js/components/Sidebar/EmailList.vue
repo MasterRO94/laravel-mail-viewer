@@ -102,12 +102,12 @@ const filter = reactive<{
   endDate: '',
 });
 
-const loadEmails = async (fetchNew: boolean = false, merge: boolean = true) => {
+const loadEmails = async (fetchNew: boolean = false, merge: boolean = true, fresh: boolean = false) => {
   if (loading.value && !fetchNew) {
     return;
   }
 
-  if (emails.value && !emails.value.hasMoreItems && !fetchNew) {
+  if (!fresh && emails.value && !emails.value.hasMoreItems && !fetchNew) {
     return;
   }
 
@@ -121,7 +121,7 @@ const loadEmails = async (fetchNew: boolean = false, merge: boolean = true) => {
     if (emails.value?.data[0]?.id) {
       params.latestId = emails.value.data[0].id;
     }
-  } else {
+  } else if (!fresh) {
     const oldestId = emails.value?.data[emails.value.data.length - 1]?.id;
 
     if (oldestId) {
@@ -187,7 +187,7 @@ const search = async (filters: { search: string, startDate: string | null, endDa
   filter.startDate = filters.startDate ?? '';
   filter.endDate = filters.endDate ?? '';
 
-  await loadEmails(false, false);
+  await loadEmails(false, false, true);
 
   searching.value = false;
 };
