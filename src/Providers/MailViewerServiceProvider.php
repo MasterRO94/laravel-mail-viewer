@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace MasterRO\MailViewer\Providers;
 
-use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Illuminate\Mail\Events\MessageSending;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\ServiceProvider;
 use MasterRO\MailViewer\Commands\PruneCommand;
 use MasterRO\MailViewer\Commands\PublishCommand;
 use MasterRO\MailViewer\Listeners\LogMail;
@@ -14,18 +15,10 @@ use MasterRO\MailViewer\Services\AttachmentsParser;
 use MasterRO\MailViewer\Services\HeadersParser;
 use MasterRO\MailViewer\Services\Logger;
 
-class MailViewerServiceProvider extends EventServiceProvider
+class MailViewerServiceProvider extends ServiceProvider
 {
-    protected $listen = [
-        MessageSending::class => [
-            LogMail::class,
-        ],
-    ];
-
     public function register(): void
     {
-        parent::register();
-
         $this->app->scoped(AddressParser::class);
         $this->app->scoped(AttachmentsParser::class);
         $this->app->scoped(HeadersParser::class);
@@ -39,7 +32,7 @@ class MailViewerServiceProvider extends EventServiceProvider
 
     public function boot(): void
     {
-        parent::boot();
+        Event::listen(MessageSending::class, LogMail::class);
 
         $this->publish();
 
