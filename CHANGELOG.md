@@ -5,6 +5,21 @@ All notable changes to `masterro/laravel-mail-viewer` are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project
 adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.2.2] - 2026-08-27
+
+### Fixed
+
+- Blank Mail Viewer page with `Uncaught SyntaxError: Cannot use 'import.meta' outside a module`.
+  The production bundle was loaded with a plain `<script src="...app.js">` tag, but it is an ES
+  module: the build is code-split (Shiki's `html` and `css` language chunks and its themes are
+  dynamic imports), and Vite 8's preload helper now resolves those chunk URLs through
+  `import.meta.resolve` / `new URL(chunk, import.meta.url)`. A classic script cannot parse
+  `import.meta`, so the whole file failed to evaluate and Vue never mounted. The tag is now
+  `type="module"`, which also makes the chunks resolve relative to the published asset directory.
+  No configuration or API changes; upgrading is enough. Applications that published the views
+  (`--tag=mail-viewer-views`) must re-publish or add `type="module"` to their own copy of
+  `mails/index.blade.php`.
+
 ## [3.2.1] - 2026-08-04
 
 ### Fixed

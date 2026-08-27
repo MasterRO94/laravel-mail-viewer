@@ -188,3 +188,13 @@ test('it receives mail logs stats', function () {
             ],
         ]);
 });
+
+test('it loads the built bundle as an es module', function () {
+    $response = $this
+        ->get(route('mail-viewer::index'))
+        ->assertOk();
+
+    expect($response->getContent())
+        ->toContain('type="module"')
+        ->toMatch('/<script\s+type="module"\s+src="[^"]*vendor\/mail-viewer\/assets\/app\.js"/');
+});

@@ -50,7 +50,10 @@
       src="http://localhost:5173/resources/js/app.js"
     ></script>
   @else
-    <script src="{{ asset('vendor/mail-viewer/assets/app.js') }}"></script>
+    <script
+      type="module"
+      src="{{ asset('vendor/mail-viewer/assets/app.js') }}"
+    ></script>
   @endif
 </body>
 </html>
